@@ -11,6 +11,7 @@ using System.Text.Json;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using System.Diagnostics;
+using IotHubFunction.Configuration;
 
 namespace IotHubFunction
 {
@@ -44,6 +45,12 @@ namespace IotHubFunction
             {
                 // Deserialize ChirpStack message
                 var chirpStackMessage = JsonSerializer.Deserialize<ChirpStackMessage>(message.Body);
+                
+                // Create device based on profile name
+                var device = DeviceFactory.Create(chirpStackMessage.DeviceInfo?.DeviceProfileName);
+                
+                // Create readings from message (TODO: need accountId from DB first)
+                // var readings = device.CreateReadings(chirpStackMessage, accountId.ToString());
                 
                 // Build enriched state with all metadata
                 var enrichedState = EnrichedDeviceState.FromChirpStackMessage(chirpStackMessage);

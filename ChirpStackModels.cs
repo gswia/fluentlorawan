@@ -7,6 +7,9 @@ namespace IotHubFunction
     /// </summary>
     public class ChirpStackMessage
     {
+        [JsonPropertyName("deduplicationId")]
+        public string DeduplicationId { get; set; }
+
         [JsonPropertyName("time")]
         public DateTime Time { get; set; }
 

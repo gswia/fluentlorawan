@@ -7,5 +7,11 @@ namespace IotHubFunction.Readings
         public string DeviceId { get; set; }
         public string SensorId { get; set; }
         public string MessageId { get; set; }
+        public string Type { get; set; }
+
+        protected Reading()
+        {
+            Type = GetType().Name;
+        }
     }
 }
