@@ -1,0 +1,58 @@
+{
+  "deduplicationId": "09ca049f-5b6b-4357-9fdf-899c9f3258af",
+  "time": "2026-02-06T05:45:58.527848005+00:00",
+  "deviceInfo": {
+    "tenantId": "bb660dce-697d-411d-a90b-5875de29246e",
+    "tenantName": "ChirpStack",
+    "applicationId": "acce7fd8-8d0e-4ed3-90b2-f60d27847221",
+    "applicationName": "Application_01",
+    "deviceProfileId": "7b88eab1-97b4-4af7-a948-1ee6855c1119",
+    "deviceProfileName": "LHT65N-E3-Template",
+    "deviceName": "Temp_Device01",
+    "devEui": "a840416cba5fa8d9",
+    "deviceClassEnabled": "CLASS_A",
+    "tags": {}
+  },
+  "devAddr": "004e22bd",
+  "adr": true,
+  "dr": 3,
+  "fCnt": 18,
+  "fPort": 2,
+  "confirmed": false,
+  "data": "zGIIaAICAQhZf/8=",
+  "object": {
+    "TempC_DS": 21.37,
+    "Bat_status": "Good (>=2.65V)",
+    "TempC_SHT": 21.52,
+    "Hum_SHT": 51.4,
+    "BatV": 3.17,
+    "Ext_sensor": "Temperature Sensor (DS18B20 / E1)"
+  },
+  "rxInfo": [
+    {
+      "gatewayId": "2cf7f11173000049",
+      "uplinkId": 805438712,
+      "gwTime": "2026-02-06T05:45:58.527848005+00:00",
+      "nsTime": "2026-02-06T05:45:58.609046795+00:00",
+      "rssi": -68,
+      "snr": 10.75,
+      "location": {
+        "latitude": 47.732470581387695,
+        "longitude": -122.2378312247609
+      },
+      "context": "AAAAAAAAAAAAiAAAC7KEIg==",
+      "crcStatus": "CRC_OK"
+    }
+  ],
+  "txInfo": {
+    "frequency": 904300000,
+    "modulation": {
+      "lora": {
+        "bandwidth": 125000,
+        "spreadingFactor": 7,
+        "codeRate": "CR_4_5"
+      }
+    }
+  },
+  "regionConfigId": "us915_1"
+}
