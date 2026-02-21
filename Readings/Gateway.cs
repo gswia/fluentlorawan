@@ -9,5 +9,7 @@ namespace IotHubFunction.Readings
         public DateTime NsTime { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+
+        public override object GetPayload() => new { GatewayId, Rssi, Snr, GwTime, NsTime, Latitude, Longitude };
     }
 }
