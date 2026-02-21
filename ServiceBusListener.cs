@@ -63,7 +63,7 @@ namespace IotHubFunction
                 _telemetryClient.TrackMetric("MessageLatency_ServiceBusToFunction", (now - enrichedState.Time).TotalMilliseconds);
                 
                 // Query PostgreSQL for account ID using Managed Identity
-                deviceId = $"l-{enrichedState.DevEui}";
+                deviceId = enrichedState.DevEui;
                 devEui = enrichedState.DevEui;
                 deviceProfileName = enrichedState.DeviceProfileName;
                 gatewayId = enrichedState.GatewayId;
