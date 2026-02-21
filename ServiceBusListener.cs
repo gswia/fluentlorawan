@@ -49,11 +49,40 @@ namespace IotHubFunction
                 // Create device based on profile name
                 var device = DeviceFactory.Create(chirpStackMessage.DeviceInfo?.DeviceProfileName);
                 
-                // Create readings from message (TODO: need accountId from DB first)
-                // var readings = device.CreateReadings(chirpStackMessage, accountId.ToString());
-                
                 // Build enriched state with all metadata
                 var enrichedState = EnrichedDeviceState.FromChirpStackMessage(chirpStackMessage);
+                
+                // Create readings from message (using temp accountId for now)
+                try
+                {
+                    var readings = device.CreateReadings(chirpStackMessage, "temp-account-id");
+                    
+                    // Log each reading separately to Application Insights
+                    foreach (var reading in readings)
+                    {
+                        var readingJson = JsonSerializer.Serialize(reading, new JsonSerializerOptions { WriteIndented = false });
+                        _telemetryClient.TrackEvent($"Reading_{reading.Type}", 
+                            new Dictionary<string, string>
+                            {
+                                { "DevEui", reading.DeviceId },
+                                { "ReadingType", reading.Type },
+                                { "SensorId", reading.SensorId },
+                                { "MessageId", reading.MessageId },
+                                { "TimestampUTC", reading.TimestampUTC.ToString("O") },
+                                { "ReadingData", readingJson }
+                            });
+                    }
+                    
+                    _telemetryClient.TrackMetric("ReadingsCreated", readings.Count);
+                }
+                catch (Exception ex)
+                {
+                    _telemetryClient.TrackException(ex, new Dictionary<string, string>
+                    {
+                        { "DevEui", chirpStackMessage?.DeviceInfo?.DevEui ?? "unknown" },
+                        { "Operation", "CreateReadings" }
+                    });
+                }
                 
                 // Track latency metrics - total and stages
                 var now = DateTime.UtcNow;
