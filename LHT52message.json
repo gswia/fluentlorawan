@@ -1,58 +1,55 @@
 {
-  "deduplicationId": "568a5775-a177-4fd7-963d-f95bb2c71d20",
-  "time": "2026-02-17T21:40:49.015753984+00:00",
-  "deviceInfo": {
-    "tenantId": "bb660dce-697d-411d-a90b-5875de29246e",
-    "tenantName": "ChirpStack",
-    "applicationId": "acce7fd8-8d0e-4ed3-90b2-f60d27847221",
-    "applicationName": "Application_01",
-    "deviceProfileId": "fc2012ce-f4d1-46ec-a781-eb1b036aaa07",
-    "deviceProfileName": "LHT52",
-    "deviceName": "Master",
-    "devEui": "a84041224a600684",
-    "deviceClassEnabled": "CLASS_A",
-    "tags": {}
-  },
-  "devAddr": "01672e5d",
-  "adr": true,
-  "dr": 0,
-  "fCnt": 0,
-  "fPort": 5,
-  "confirmed": false,
-  "data": "CQEgAgAMlg==",
-  "object": {
-    "Sensor_Model": 9.0,
-    "Bat_mV": 3222.0,
-    "Firmware_Version": "120",
-    "Sub_Band": 0.0,
-    "Freq_Band": 2.0,
-    "Node_type": "LHT52"
-  },
-  "rxInfo": [
-    {
-      "gatewayId": "2cf7f11173000049",
-      "uplinkId": 1002885992,
-      "gwTime": "2026-02-17T21:40:49.015753984+00:00",
-      "nsTime": "2026-02-17T21:40:49.093190698+00:00",
-      "rssi": -50,
-      "snr": 13.5,
-      "location": {
-        "latitude": 47.732470581387695,
-        "longitude": -122.2378312247609
-      },
-      "context": "AAAAAAAAAAAAxAAEZExbAg==",
-      "crcStatus": "CRC_OK"
-    }
-  ],
-  "txInfo": {
-    "frequency": 903900000,
-    "modulation": {
-      "lora": {
-        "bandwidth": 125000,
-        "spreadingFactor": 10,
-        "codeRate": "CR_4_5"
-      }
-    }
-  },
-  "regionConfigId": "us915_1"
+	"deduplicationId": "9b945748-e4c0-42aa-add9-324285b56987",
+	"time": "2026-02-21T02:29:28.210278987+00:00",
+	"deviceInfo": {
+		"tenantId": "bb660dce-697d-411d-a90b-5875de29246e",
+		"tenantName": "ChirpStack",
+		"applicationId": "acce7fd8-8d0e-4ed3-90b2-f60d27847221",
+		"applicationName": "Application_01",
+		"deviceProfileId": "fc2012ce-f4d1-46ec-a781-eb1b036aaa07",
+		"deviceProfileName": "LHT52",
+		"deviceName": "BR2",
+		"devEui": "a8404155476006c8",
+		"deviceClassEnabled": "CLASS_A",
+		"tags": {}
+	},
+	"devAddr": "01dc5ce0",
+	"adr": true,
+	"dr": 3,
+	"fCnt": 237,
+	"fPort": 2,
+	"confirmed": false,
+	"data": "CEwB9n//AWmZGH4=",
+	"object": {
+		"TempC_SHT": 21.24,
+		"Systimestamp": 1771640958.0,
+		"Hum_SHT": 50.2
+	},
+	"rxInfo": [
+		{
+			"gatewayId": "2cf7f11173000049",
+			"uplinkId": 2561533162,
+			"gwTime": "2026-02-21T02:29:28.210278987+00:00",
+			"nsTime": "2026-02-21T02:29:28.287887850+00:00",
+			"rssi": -35,
+			"snr": 14.25,
+			"location": {
+				"latitude": 47.732470581387695,
+				"longitude": -122.2378312247609
+			},
+			"context": "AAAAAAAAAAAABgACFTO2PQ==",
+			"crcStatus": "CRC_OK"
+		}
+	],
+	"txInfo": {
+		"frequency": 903900000,
+		"modulation": {
+			"lora": {
+				"bandwidth": 125000,
+				"spreadingFactor": 7,
+				"codeRate": "CR_4_5"
+			}
+		}
+	},
+	"regionConfigId": "us915_1"
 }

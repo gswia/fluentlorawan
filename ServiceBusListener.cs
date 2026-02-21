@@ -32,6 +32,15 @@ namespace IotHubFunction
             ServiceBusReceivedMessage message)
         {
             var stopwatch = Stopwatch.StartNew();
+            _telemetryClient.TrackEvent("MessageReceiveStarted", new Dictionary<string, string>
+            {
+                { "MessageId", message.MessageId },
+                { "CorrelationId", message.CorrelationId ?? string.Empty },
+                { "EnqueuedTimeUtc", message.EnqueuedTime.UtcDateTime.ToString("O") },
+                { "DeliveryCount", message.DeliveryCount.ToString() },
+                { "SequenceNumber", message.SequenceNumber.ToString() }
+            });
+
             string deviceId = null;
             string devEui = null;
             string deviceProfileName = null;
@@ -41,8 +50,8 @@ namespace IotHubFunction
             int? fcnt = null;
             Guid? accountId = null;
             
-            try
-            {
+            //try
+            //{
                 // Deserialize ChirpStack message
                 var chirpStackMessage = JsonSerializer.Deserialize<ChirpStackMessage>(message.Body);
                 
@@ -50,11 +59,9 @@ namespace IotHubFunction
                 var device = DeviceFactory.Create(chirpStackMessage.DeviceInfo?.DeviceProfileName);
                 
                 // Build enriched state with all metadata
-                var enrichedState = EnrichedDeviceState.FromChirpStackMessage(chirpStackMessage);
+                //var enrichedState = EnrichedDeviceState.FromChirpStackMessage(chirpStackMessage);
                 
                 // Create readings from message (using temp accountId for now)
-                try
-                {
                     var readings = device.CreateReadings(chirpStackMessage, "temp-account-id");
                     
                     // Log each reading separately to Application Insights
@@ -74,7 +81,9 @@ namespace IotHubFunction
                     }
                     
                     _telemetryClient.TrackMetric("ReadingsCreated", readings.Count);
-                }
+
+                    throw new Exception("Test exception after creating readings");
+                /*}
                 catch (Exception ex)
                 {
                     _telemetryClient.TrackException(ex, new Dictionary<string, string>
@@ -82,10 +91,10 @@ namespace IotHubFunction
                         { "DevEui", chirpStackMessage?.DeviceInfo?.DevEui ?? "unknown" },
                         { "Operation", "CreateReadings" }
                     });
-                }
+                }*/
                 
                 // Track latency metrics - total and stages
-                var now = DateTime.UtcNow;
+                /*var now = DateTime.UtcNow;
                 _telemetryClient.TrackMetric("MessageLatency_Total", (now - enrichedState.GwTime).TotalMilliseconds);
                 _telemetryClient.TrackMetric("MessageLatency_GatewayToNetworkServer", (enrichedState.NsTime - enrichedState.GwTime).TotalMilliseconds);
                 _telemetryClient.TrackMetric("MessageLatency_NetworkServerToServiceBus", (enrichedState.Time - enrichedState.NsTime).TotalMilliseconds);
@@ -232,11 +241,11 @@ namespace IotHubFunction
                     { "Snr", snr?.ToString() ?? "null" },
                     { "FCnt", fcnt?.ToString() ?? "null" },
                     { "AccountId", accountId?.ToString() ?? "null" }
-                });
-            }
-            catch (Exception ex)
-            {
-                stopwatch.Stop();
+                });*/
+            //}
+            //catch (Exception ex)
+            //{
+                /*stopwatch.Stop();
                 
                 _telemetryClient.TrackEvent("MessageProcessingCompleted", new Dictionary<string, string>
                 {
@@ -253,8 +262,8 @@ namespace IotHubFunction
                 });
                 
                 _telemetryClient.TrackException(ex);
-                throw;
-            }
+                throw;*/
+            //}
 
             // Send historical state to Azure Data Explorer
             // await SendToAdxAsync(deviceId, accountId, enrichedState.Time, sensorReadingsJson);

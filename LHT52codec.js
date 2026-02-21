@@ -1,3 +1,10 @@
+function str_pad(byte) {
+    var zero = '0';
+    var hex = byte.toString(16);
+    var tmp = 2 - hex.length;
+    return zero.substr(0, tmp) + hex;
+}
+
 function decodeUplink(input) {
   return {
     data: Decode(input.fPort, input.bytes, input.variables)

@@ -1,5 +1,6 @@
 using IotHubFunction.Sensors;
 using IotHubFunction.Readings;
+using System.Text.Json;
 
 namespace IotHubFunction.Configuration
 {
@@ -34,7 +35,7 @@ namespace IotHubFunction.Configuration
                 AccountId = accountId,
                 DeviceId = deviceId,
                 MessageId = messageId,
-                SensorId = GatewaySensor.SensorId,
+                SensorId = gatewayRx.GatewayId, // Use actual gateway ID as sensor ID
                 GatewayId = gatewayRx.GatewayId,
                 Rssi = gatewayRx.Rssi,
                 Snr = gatewayRx.Snr,
@@ -47,7 +48,7 @@ namespace IotHubFunction.Configuration
             // fPort 2: Temperature, Humidity (uses device timestamp)
             if (fPort == 2)
             {
-                var systimestamp = Convert.ToInt64(message.Object["Systimestamp"]);
+                var systimestamp = (long)((JsonElement)message.Object["Systimestamp"]).GetDouble();
                 var deviceTimestamp = DateTimeOffset.FromUnixTimeSeconds(systimestamp).UtcDateTime;
                 
                 // Internal Temperature (TempC_SHT)
@@ -58,7 +59,7 @@ namespace IotHubFunction.Configuration
                     DeviceId = deviceId,
                     MessageId = messageId,
                     SensorId = TemperatureSensor.SensorId,
-                    ValueC = Convert.ToDouble(message.Object["TempC_SHT"])
+                    ValueC = ((JsonElement)message.Object["TempC_SHT"]).GetDouble()
                 });
                 
                 // Humidity (Hum_SHT)
@@ -69,7 +70,7 @@ namespace IotHubFunction.Configuration
                     DeviceId = deviceId,
                     MessageId = messageId,
                     SensorId = HumiditySensor.SensorId,
-                    ValueRH = Convert.ToDouble(message.Object["Hum_SHT"])
+                    ValueRH = ((JsonElement)message.Object["Hum_SHT"]).GetDouble()
                 });
             }
             
@@ -84,7 +85,7 @@ namespace IotHubFunction.Configuration
                     DeviceId = deviceId,
                     MessageId = messageId,
                     SensorId = VoltageSensor.SensorId,
-                    ValueV = Convert.ToDouble(message.Object["Bat_mV"]) / 1000.0
+                    ValueV = ((JsonElement)message.Object["Bat_mV"]).GetDouble() / 1000.0
                 });
                 
                 // Device Model (Sensor_Model)
@@ -95,7 +96,7 @@ namespace IotHubFunction.Configuration
                     DeviceId = deviceId,
                     MessageId = messageId,
                     SensorId = DeviceModelSensor.SensorId,
-                    Value = Convert.ToInt32(message.Object["Sensor_Model"])
+                    Value = (int)((JsonElement)message.Object["Sensor_Model"]).GetDouble()
                 });
                 
                 // Firmware Version
@@ -106,7 +107,7 @@ namespace IotHubFunction.Configuration
                     DeviceId = deviceId,
                     MessageId = messageId,
                     SensorId = FirmwareSensor.SensorId,
-                    Value = message.Object["Firmware_Version"].ToString()
+                    Value = ((JsonElement)message.Object["Firmware_Version"]).GetString()
                 });
                 
                 // LoRa Config (Freq_Band + Sub_Band)
@@ -117,8 +118,8 @@ namespace IotHubFunction.Configuration
                     DeviceId = deviceId,
                     MessageId = messageId,
                     SensorId = RadioConfigSensor.SensorId,
-                    FrequencyBand = Convert.ToInt32(message.Object["Freq_Band"]),
-                    SubBand = Convert.ToInt32(message.Object["Sub_Band"])
+                    FrequencyBand = (int)((JsonElement)message.Object["Freq_Band"]).GetDouble(),
+                    SubBand = (int)((JsonElement)message.Object["Sub_Band"]).GetDouble()
                 });
             }
             

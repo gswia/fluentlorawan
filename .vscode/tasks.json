@@ -31,6 +31,18 @@
 			"problemMatcher": "$msCompile"
 		},
 		{
+			"label": "build (message-flow-test)",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"${workspaceFolder}/MessageFlowTest/MessageFlowTest.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"type": "process",
+			"problemMatcher": "$msCompile"
+		},
+		{
 			"label": "clean release (functions)",
 			"command": "dotnet",
 			"args": [

@@ -2,6 +2,26 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug MessageFlowTest",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build (message-flow-test)",
+            "program": "${workspaceFolder}/MessageFlowTest/bin/Debug/net8.0/MessageFlowTest.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "justMyCode": false,
+            "enableStepFiltering": false,
+            "logging": {
+                "moduleLoad": false
+            },
+            "symbolOptions": {
+                "searchPaths": [],
+                "searchMicrosoftSymbolServer": false
+            }
+        },
+        {
             "name": "Attach to .NET Functions",
             "type": "coreclr",
             "request": "attach",

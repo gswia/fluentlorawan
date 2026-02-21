@@ -7,6 +7,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="MessageFlowTest\**\*.cs" />
+    <EmbeddedResource Remove="MessageFlowTest\**\*" />
+    <None Remove="MessageFlowTest\**\*" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Azure.Data.Tables" Version="12.11.0" />
     <PackageReference Include="Azure.Identity" Version="1.17.1" />
     <PackageReference Include="Microsoft.Azure.Kusto.Ingest" Version="14.0.3" />
