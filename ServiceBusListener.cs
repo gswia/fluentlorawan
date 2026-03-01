@@ -1,7 +1,6 @@
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using Azure.Messaging.ServiceBus;
-using Azure.Identity;
 using Npgsql;
 using NpgsqlTypes;
 using System.Text.Json;
@@ -50,27 +49,8 @@ namespace IotHubFunction
 
             // Query PostgreSQL for account using device ID
             var connectionString = Environment.GetEnvironmentVariable("PostgresConnectionString");
-            var managedIdentityClientId = Environment.GetEnvironmentVariable("ManagedIdentityClientId");
-            
-            var credential = new DefaultAzureCredential(new DefaultAzureCredentialOptions
-            {
-                ManagedIdentityClientId = managedIdentityClientId
-            });
             
             var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
-            dataSourceBuilder.UsePeriodicPasswordProvider(
-                async (_, ct) =>
-                {
-                    var token = await credential.GetTokenAsync(
-                        new Azure.Core.TokenRequestContext(new[] { "https://ossrdbms-aad.database.windows.net/.default" }),
-                        ct
-                    );
-                    return token.Token;
-                },
-                TimeSpan.FromHours(1),
-                TimeSpan.FromSeconds(10)
-            );
-            
             await using var dataSource = dataSourceBuilder.Build();
             await using var conn = await dataSource.OpenConnectionAsync();
             
