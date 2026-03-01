@@ -1,6 +1,6 @@
 namespace IotHubFunction.Readings
 {
-    public class Version : Reading
+    public class Version : SensorReading
     {
         public string Value { get; set; }
 

@@ -91,7 +91,16 @@ foreach (var reading in readings)
 	Console.WriteLine($"ApplicationId  : {reading.ApplicationId}");
 	Console.WriteLine($"SiteId         : {reading.SiteId}");
 	Console.WriteLine($"DeviceId       : {reading.DeviceId}");
-	Console.WriteLine($"SensorId       : {reading.SensorId}");
+	
+	if (reading is IotHubFunction.Readings.SensorReading sensorReading)
+	{
+		Console.WriteLine($"SensorId       : {sensorReading.SensorId}");
+	}
+	else if (reading is IotHubFunction.Readings.GatewayReading gatewayReading)
+	{
+		Console.WriteLine($"GatewayId      : {gatewayReading.GatewayId}");
+	}
+	
 	Console.WriteLine($"MessageId      : {reading.MessageId}");
 	Console.WriteLine($"Payload        : {JsonSerializer.Serialize(reading.GetPayload())}");
 	Console.WriteLine();

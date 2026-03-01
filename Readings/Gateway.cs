@@ -1,6 +1,6 @@
 namespace IotHubFunction.Readings
 {
-    public class Gateway : Reading
+    public class Gateway : GatewayReading
     {
         public string GatewayId { get; set; }
         public int Rssi { get; set; }

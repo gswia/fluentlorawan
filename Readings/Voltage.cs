@@ -1,6 +1,6 @@
 namespace IotHubFunction.Readings
 {
-    public class Voltage : Reading
+    public class Voltage : SensorReading
     {
         public double ValueV { get; set; }
 

@@ -1,6 +1,6 @@
 namespace IotHubFunction.Readings
 {
-    public class ProbeId : Reading
+    public class ProbeId : SensorReading
     {
         public string Value { get; set; }
 

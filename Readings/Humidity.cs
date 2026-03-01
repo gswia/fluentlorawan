@@ -1,6 +1,6 @@
 namespace IotHubFunction.Readings
 {
-    public class Humidity : Reading
+    public class Humidity : SensorReading
     {
         public double ValueRH { get; set; }
 

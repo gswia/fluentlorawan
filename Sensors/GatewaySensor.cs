@@ -34,7 +34,6 @@ namespace IotHubFunction.Sensors
                     SiteId = siteId,
                     DeviceId = deviceId,
                     MessageId = messageId,
-                    SensorId = gatewayRx.GatewayId,
                     GatewayId = gatewayRx.GatewayId,
                     Rssi = gatewayRx.Rssi,
                     Snr = gatewayRx.Snr,

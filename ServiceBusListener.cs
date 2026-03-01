@@ -120,26 +120,50 @@ namespace IotHubFunction
             // Insert readings into PostgreSQL
             foreach (var reading in readings)
             {
-                await using var insertCmd = new NpgsqlCommand(
-                    @"INSERT INTO readings (
-                        timestamp_utc, account_id, application_id, site_id, 
-                        device_id, sensor_id, message_id, type, payload
-                    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
-                    conn);
-                
                 var payloadJson = JsonSerializer.Serialize(reading.GetPayload());
                 
-                insertCmd.Parameters.AddWithValue(reading.TimestampUTC);
-                insertCmd.Parameters.AddWithValue(reading.AccountId);
-                insertCmd.Parameters.AddWithValue(reading.ApplicationId);
-                insertCmd.Parameters.AddWithValue(reading.SiteId);
-                insertCmd.Parameters.AddWithValue(reading.DeviceId);
-                insertCmd.Parameters.AddWithValue(reading.SensorId);
-                insertCmd.Parameters.AddWithValue(reading.MessageId);
-                insertCmd.Parameters.AddWithValue(reading.Type);
-                insertCmd.Parameters.AddWithValue(NpgsqlDbType.Jsonb, payloadJson);
-                
-                await insertCmd.ExecuteNonQueryAsync();
+                if (reading is Readings.SensorReading sensorReading)
+                {
+                    await using var insertCmd = new NpgsqlCommand(
+                        @"INSERT INTO sensor_readings (
+                            timestamp_utc, account_id, application_id, site_id, 
+                            device_id, sensor_id, message_id, type, payload
+                        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
+                        conn);
+                    
+                    insertCmd.Parameters.AddWithValue(sensorReading.TimestampUTC);
+                    insertCmd.Parameters.AddWithValue(sensorReading.AccountId);
+                    insertCmd.Parameters.AddWithValue(sensorReading.ApplicationId);
+                    insertCmd.Parameters.AddWithValue(sensorReading.SiteId);
+                    insertCmd.Parameters.AddWithValue(sensorReading.DeviceId);
+                    insertCmd.Parameters.AddWithValue(sensorReading.SensorId);
+                    insertCmd.Parameters.AddWithValue(sensorReading.MessageId);
+                    insertCmd.Parameters.AddWithValue(sensorReading.Type);
+                    insertCmd.Parameters.AddWithValue(NpgsqlDbType.Jsonb, payloadJson);
+                    
+                    await insertCmd.ExecuteNonQueryAsync();
+                }
+                else if (reading is Readings.GatewayReading gatewayReading)
+                {
+                    await using var insertCmd = new NpgsqlCommand(
+                        @"INSERT INTO gateway_readings (
+                            timestamp_utc, account_id, application_id, site_id, 
+                            device_id, gateway_id, message_id, type, payload
+                        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
+                        conn);
+                    
+                    insertCmd.Parameters.AddWithValue(gatewayReading.TimestampUTC);
+                    insertCmd.Parameters.AddWithValue(gatewayReading.AccountId);
+                    insertCmd.Parameters.AddWithValue(gatewayReading.ApplicationId);
+                    insertCmd.Parameters.AddWithValue(gatewayReading.SiteId);
+                    insertCmd.Parameters.AddWithValue(gatewayReading.DeviceId);
+                    insertCmd.Parameters.AddWithValue(gatewayReading.GatewayId);
+                    insertCmd.Parameters.AddWithValue(gatewayReading.MessageId);
+                    insertCmd.Parameters.AddWithValue(gatewayReading.Type);
+                    insertCmd.Parameters.AddWithValue(NpgsqlDbType.Jsonb, payloadJson);
+                    
+                    await insertCmd.ExecuteNonQueryAsync();
+                }
             }
             
             // Track metrics
