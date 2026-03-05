@@ -74,7 +74,6 @@ function Decode(fPort, bytes, variables) {
   var data = {};
 
   if ((fPort == 3) && ((bytes[2] == 0x01) || (bytes[2] == 0x02) || (bytes[2] == 0x03) || (bytes[2] == 0x04))) {
-    decode.Node_type = "LHT65N";
     var array1 = [];
     var bytes1 = "0x";
     var str1 = Str1(bytes);
@@ -86,7 +85,7 @@ function Decode(fPort, bytes, variables) {
     rs.pop();
     var new_arr = [...rs];
     var data1 = new_arr;
-    decode.bat = parseInt(bytes1 + str2.substring(0, 4) & 0x3FFF);
+    decode.Bat_mV = parseInt(bytes1 + str2.substring(0, 4) & 0x3FFF);
 
     if (parseInt(bytes1 + str2.substring(4,)) == 1) {
       decode.sensor = "ds18b20";
@@ -150,55 +149,29 @@ function Decode(fPort, bytes, variables) {
       freq_band = "MA869";
 
     var firm_ver = (bytes[1] & 0x0f) + '.' + (bytes[2] >> 4 & 0x0f) + '.' + (bytes[2] & 0x0f);
-    var bat = (bytes[5] << 8 | bytes[6]) / 1000;
+    var bat = bytes[5] << 8 | bytes[6];
 
     return {
-      SENSOR_MODEL: sensor,
-      FIRMWARE_VERSION: firm_ver,
-      FREQUENCY_BAND: freq_band,
-      SUB_BAND: sub_band,
-      BAT: bat,
+      Sensor_Model: sensor,
+      Firmware_Version: firm_ver,
+      Freq_Band: freq_band,
+      Sub_Band: sub_band,
+      Bat_mV: bat,
     };
   }
 
   switch (poll_message_status) {
     case 0: {
-      if (Ext == 0x09) {
-        decode.TempC_DS = parseFloat(((bytes[0] << 24 >> 16 | bytes[1]) / 100).toFixed(2));
-        decode.Bat_status = bytes[4] >> 6;
-      } else if (Ext == 0x0A) {
-        decode.TempC_TMP117 = parseFloat(((bytes[0] << 24 >> 16 | bytes[1]) / 100).toFixed(2));
-        decode.Bat_status = bytes[4] >> 6;
-      } else {
-        decode.BatV = ((bytes[0] << 8 | bytes[1]) & 0x3FFF) / 1000;
-        var Bat_status = bytes[0] >> 6;
-        if (Bat_status == 3)
-          decode.Bat_status = "Good";
-        else if (Bat_status == 2)
-          decode.Bat_status = "OK";
-        else if (Bat_status == 1)
-          decode.Bat_status = "Low";
-        else if (Bat_status == 0)
-          decode.Bat_status = "Ultra Low";
-      }
+      decode.Bat_mV = ((bytes[0] << 8 | bytes[1]) & 0x3FFF);
 
       if (Ext != 0x0f) {
         decode.TempC_SHT = parseFloat(((bytes[2] << 24 >> 16 | bytes[3]) / 100).toFixed(2));
         decode.Hum_SHT = parseFloat((((bytes[4] << 8 | bytes[5]) & 0xFFF) / 10).toFixed(1));
       }
 
-      if (Connect == '1') {
-        decode.No_connect = "Sensor no connection";
-      }
-
-      if (Ext == '0') {
-        decode.Ext_sensor = "No external sensor";
-      } else if (Ext == '5') {
-        decode.Work_mode = "Illumination Sensor";
+      if (Ext == '5') {
         decode.ILL_lx = bytes[7] << 8 | bytes[8];
       }
-
-      decode.Node_type = "LHT65N";
       if ((bytes.length == 11) || (bytes.length == 15)) {
         return decode;
       }
@@ -213,7 +186,6 @@ function Decode(fPort, bytes, variables) {
         else
           decode.DATALOG += da;
       }
-      decode.Node_type = "LHT65N";
       return decode;
     }
 
@@ -225,7 +197,6 @@ function Decode(fPort, bytes, variables) {
         else
           data.DATALOG += da;
       }
-      data.Node_type = "LHT65N";
       return {
         data: data,
         retransmission_Status: "retransmission_Status",

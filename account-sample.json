@@ -2,17 +2,12 @@
   "AccountId": "8f4a2e7c-5b1d-4f89-a3c6-9d8e7f6a5b4c",
   "Applications": [
     {
-      "ApplicationId": "f5e6d7c8-9a0b-4c1d-2e3f-4a5b6c7d8e9f",
       "Sites": [
         {
           "SiteId": "3c8f9a2e-7d4b-4e1f-9a5c-2b8e7f6a9d3c",
-          "GatewayIds": [
-            "2cf7f11173000049"
-          ],
           "Devices": [
             {
               "$type": "LHT52",
-              "DeviceId": "a8404155476006c8",
               "Sensors": [
                 {
                   "$type": "Temperature",
@@ -56,11 +51,11 @@
                   "SensorType": "Gateway",
                   "Description": "Bedroom 2 gateway info"
                 }
-              ]
+              ],
+              "DeviceId": "a8404155476006c8"
             },
             {
               "$type": "LHT52",
-              "DeviceId": "a8404122c96006e4",
               "Sensors": [
                 {
                   "$type": "Temperature",
@@ -104,11 +99,11 @@
                   "SensorType": "Gateway",
                   "Description": "Living room gateway info"
                 }
-              ]
+              ],
+              "DeviceId": "a8404122c96006e4"
             },
             {
               "$type": "LHT52",
-              "DeviceId": "a840411d136006d7",
               "Sensors": [
                 {
                   "$type": "Temperature",
@@ -152,11 +147,11 @@
                   "SensorType": "Gateway",
                   "Description": "Bedroom 4 gateway info"
                 }
-              ]
+              ],
+              "DeviceId": "a840411d136006d7"
             },
             {
               "$type": "LHT52",
-              "DeviceId": "a840418b4b6006cd",
               "Sensors": [
                 {
                   "$type": "Temperature",
@@ -200,11 +195,11 @@
                   "SensorType": "Gateway",
                   "Description": "Bedroom 3 gateway info"
                 }
-              ]
+              ],
+              "DeviceId": "a840418b4b6006cd"
             },
             {
               "$type": "LHT52",
-              "DeviceId": "a84041224a600684",
               "Sensors": [
                 {
                   "$type": "Temperature",
@@ -248,11 +243,118 @@
                   "SensorType": "Gateway",
                   "Description": "Master bedroom gateway info"
                 }
-              ]
+              ],
+              "DeviceId": "a84041224a600684"
+            },
+            {
+              "$type": "LHT65N",
+              "Sensors": [
+                {
+                  "$type": "Temperature",
+                  "SensorId": "1f2e3d4c-5b6a-4798-8e9d-0c1f2e3d4c5b",
+                  "SensorType": "Temperature",
+                  "Description": "Garage temperature"
+                },
+                {
+                  "$type": "Humidity",
+                  "SensorId": "2e3d4c5b-6a79-48e9-d0c1-f2e3d4c5b6a7",
+                  "SensorType": "Humidity",
+                  "Description": "Garage humidity"
+                },
+                {
+                  "$type": "Voltage",
+                  "SensorId": "3d4c5b6a-798e-49d0-c1f2-e3d4c5b6a798",
+                  "SensorType": "Voltage",
+                  "Description": "Garage battery voltage"
+                },
+                {
+                  "$type": "DeviceModel",
+                  "SensorId": "4c5b6a79-8e9d-40c1-f2e3-d4c5b6a798e9",
+                  "SensorType": "DeviceModel",
+                  "Description": "Garage device model"
+                },
+                {
+                  "$type": "Firmware",
+                  "SensorId": "5b6a798e-9d0c-41f2-e3d4-c5b6a798e9d0",
+                  "SensorType": "Firmware",
+                  "Description": "Garage firmware version"
+                },
+                {
+                  "$type": "RadioConfig",
+                  "SensorId": "6a798e9d-0c1f-42e3-d4c5-b6a798e9d0c1",
+                  "SensorType": "RadioConfig",
+                  "Description": "Garage LoRa config"
+                },
+                {
+                  "$type": "Gateway",
+                  "SensorId": "798e9d0c-1f2e-43d4-c5b6-a798e9d0c1f2",
+                  "SensorType": "Gateway",
+                  "Description": "Garage gateway info"
+                }
+              ],
+              "DeviceId": "a8404101da5f3677"
+            },
+            {
+              "$type": "LHT65N",
+              "Sensors": [
+                {
+                  "$type": "Temperature",
+                  "SensorId": "8e9d0c1f-2e3d-44c5-b6a7-98e9d0c1f2e3",
+                  "SensorType": "Temperature",
+                  "Description": "Patio temperature"
+                },
+                {
+                  "$type": "Humidity",
+                  "SensorId": "9d0c1f2e-3d4c-45b6-a798-e9d0c1f2e3d4",
+                  "SensorType": "Humidity",
+                  "Description": "Patio humidity"
+                },
+                {
+                  "$type": "Voltage",
+                  "SensorId": "0c1f2e3d-4c5b-46a7-98e9-d0c1f2e3d4c5",
+                  "SensorType": "Voltage",
+                  "Description": "Patio battery voltage"
+                },
+                {
+                  "$type": "Illumination",
+                  "SensorId": "1f2e3d4c-5b6a-4798-e9d0-c1f2e3d4c5b6",
+                  "SensorType": "Illumination",
+                  "Description": "Patio illumination"
+                },
+                {
+                  "$type": "DeviceModel",
+                  "SensorId": "2e3d4c5b-6a79-48e9-d0c1-f2e3d4c5b6a7",
+                  "SensorType": "DeviceModel",
+                  "Description": "Patio device model"
+                },
+                {
+                  "$type": "Firmware",
+                  "SensorId": "3d4c5b6a-798e-49d0-c1f2-e3d4c5b6a798",
+                  "SensorType": "Firmware",
+                  "Description": "Patio firmware version"
+                },
+                {
+                  "$type": "RadioConfig",
+                  "SensorId": "4c5b6a79-8e9d-40c1-f2e3-d4c5b6a798e9",
+                  "SensorType": "RadioConfig",
+                  "Description": "Patio LoRa config"
+                },
+                {
+                  "$type": "Gateway",
+                  "SensorId": "5b6a798e-9d0c-41f2-e3d4-c5b6a798e9d0",
+                  "SensorType": "Gateway",
+                  "Description": "Patio gateway info"
+                }
+              ],
+              "DeviceId": "a84041c10b5ff491"
             }
+          ],
+          "GatewayIds": [
+            "2cf7f11173000049"
           ]
         }
-      ]
+      ],
+      "ApplicationId": "f5e6d7c8-9a0b-4c1d-2e3f-4a5b6c7d8e9f"
     }
   ]
 }
