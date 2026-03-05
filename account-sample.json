@@ -301,49 +301,49 @@
                   "$type": "Temperature",
                   "SensorId": "8e9d0c1f-2e3d-44c5-b6a7-98e9d0c1f2e3",
                   "SensorType": "Temperature",
-                  "Description": "Patio temperature"
+                  "Description": "Outdoor temperature"
                 },
                 {
                   "$type": "Humidity",
                   "SensorId": "9d0c1f2e-3d4c-45b6-a798-e9d0c1f2e3d4",
                   "SensorType": "Humidity",
-                  "Description": "Patio humidity"
+                  "Description": "Outdoor humidity"
                 },
                 {
                   "$type": "Voltage",
                   "SensorId": "0c1f2e3d-4c5b-46a7-98e9-d0c1f2e3d4c5",
                   "SensorType": "Voltage",
-                  "Description": "Patio battery voltage"
+                  "Description": "Outdoor battery voltage"
                 },
                 {
                   "$type": "Illumination",
                   "SensorId": "1f2e3d4c-5b6a-4798-e9d0-c1f2e3d4c5b6",
                   "SensorType": "Illumination",
-                  "Description": "Patio illumination"
+                  "Description": "Outdoor illumination"
                 },
                 {
                   "$type": "DeviceModel",
                   "SensorId": "2e3d4c5b-6a79-48e9-d0c1-f2e3d4c5b6a7",
                   "SensorType": "DeviceModel",
-                  "Description": "Patio device model"
+                  "Description": "Outdoor device model"
                 },
                 {
                   "$type": "Firmware",
                   "SensorId": "3d4c5b6a-798e-49d0-c1f2-e3d4c5b6a798",
                   "SensorType": "Firmware",
-                  "Description": "Patio firmware version"
+                  "Description": "Outdoor firmware version"
                 },
                 {
                   "$type": "RadioConfig",
                   "SensorId": "4c5b6a79-8e9d-40c1-f2e3-d4c5b6a798e9",
                   "SensorType": "RadioConfig",
-                  "Description": "Patio LoRa config"
+                  "Description": "Outdoor LoRa config"
                 },
                 {
                   "$type": "Gateway",
                   "SensorId": "5b6a798e-9d0c-41f2-e3d4-c5b6a798e9d0",
                   "SensorType": "Gateway",
-                  "Description": "Patio gateway info"
+                  "Description": "Outdoor gateway info"
                 }
               ],
               "DeviceId": "a84041c10b5ff491"
