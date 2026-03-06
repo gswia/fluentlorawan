@@ -347,6 +347,54 @@
                 }
               ],
               "DeviceId": "a84041c10b5ff491"
+            },
+            {
+              "$type": "LDS02",
+              "Sensors": [
+                {
+                  "$type": "Door",
+                  "SensorId": "a1b2c3d4-e5f6-47a8-9b0c-1d2e3f4a5b6c",
+                  "SensorType": "Door",
+                  "Description": "Front door status"
+                },
+                {
+                  "$type": "Voltage",
+                  "SensorId": "b2c3d4e5-f6a7-48b9-0c1d-2e3f4a5b6c7d",
+                  "SensorType": "Voltage",
+                  "Description": "Front door battery voltage"
+                },
+                {
+                  "$type": "Gateway",
+                  "SensorId": "f6a7b8c9-d0e1-42f3-4a5b-6c7d8e9f0a1b",
+                  "SensorType": "Gateway",
+                  "Description": "Front door gateway info"
+                }
+              ],
+              "DeviceId": "a8404136995ea57b"
+            },
+            {
+              "$type": "LDS02",
+              "Sensors": [
+                {
+                  "$type": "Door",
+                  "SensorId": "1a2b3c4d-5e6f-47a8-9b0c-1d2e3f4a5b6c",
+                  "SensorType": "Door",
+                  "Description": "Patio door status"
+                },
+                {
+                  "$type": "Voltage",
+                  "SensorId": "2b3c4d5e-6f7a-48b9-0c1d-2e3f4a5b6c7d",
+                  "SensorType": "Voltage",
+                  "Description": "Patio door battery voltage"
+                },
+                {
+                  "$type": "Gateway",
+                  "SensorId": "6f7a8b9c-0d1e-42f3-4a5b-6c7d8e9f0a1b",
+                  "SensorType": "Gateway",
+                  "Description": "Patio door gateway info"
+                }
+              ],
+              "DeviceId": "a8404178215ea57c"
             }
           ],
           "GatewayIds": [

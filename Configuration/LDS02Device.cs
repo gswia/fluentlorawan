@@ -1,6 +1,6 @@
 namespace IotHubFunction.Configuration
 {
-    public class LHT65NDevice : Device
+    public class LDS02Device : Device
     {
     }
 }
