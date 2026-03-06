@@ -20,8 +20,7 @@ namespace IotHubFunction.Sensors
             string messageId,
             Device device)
         {
-            // Battery voltage can appear in fPort 2 (LHT65N regular messages) or fPort 5 (configuration messages)
-            if ((message.FPort != 2 && message.FPort != 5) || message.Object == null) return new List<Reading>();
+            if (message.Object == null) return new List<Reading>();
             if (!message.Object.ContainsKey("Bat_mV")) return new List<Reading>();
 
             // Use Systimestamp if available (LHT52), otherwise use message timestamp (LHT65N or fPort 5)

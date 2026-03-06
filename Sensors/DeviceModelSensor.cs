@@ -20,7 +20,7 @@ namespace IotHubFunction.Sensors
             string messageId,
             Device device)
         {
-            if (message.FPort != 5 || message.Object == null) return new List<Reading>();
+            if (message.Object == null) return new List<Reading>();
             if (!message.Object.ContainsKey("Sensor_Model")) return new List<Reading>();
 
             return new List<Reading>

@@ -20,7 +20,7 @@ namespace IotHubFunction.Sensors
             string messageId,
             Device device)
         {
-            if (message.FPort != 2 || message.Object == null) return new List<Reading>();
+            if (message.Object == null) return new List<Reading>();
             if (!message.Object.ContainsKey("TempC_SHT")) return new List<Reading>();
 
             // Use Systimestamp if available (LHT52), otherwise use message timestamp (LHT65N)

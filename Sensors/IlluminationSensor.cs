@@ -20,7 +20,7 @@ namespace IotHubFunction.Sensors
             string messageId,
             Device device)
         {
-            if (message.FPort != 2 || message.Object == null) return new List<Reading>();
+            if (message.Object == null) return new List<Reading>();
             if (!message.Object.ContainsKey("ILL_lx")) return new List<Reading>();
 
             // LHT65N doesn't include Systimestamp for illumination readings, use message timestamp
