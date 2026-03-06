@@ -395,6 +395,66 @@
                 }
               ],
               "DeviceId": "a8404178215ea57c"
+            },
+            {
+              "$type": "LHT65NVIB",
+              "Sensors": [
+                {
+                  "$type": "Vibration",
+                  "SensorId": "7a8b9c0d-1e2f-43a4-5b6c-7d8e9f0a1b2c",
+                  "SensorType": "Vibration",
+                  "Description": "HVAC vibration monitoring"
+                },
+                {
+                  "$type": "Temperature",
+                  "SensorId": "8b9c0d1e-2f3a-44b5-6c7d-8e9f0a1b2c3d",
+                  "SensorType": "Temperature",
+                  "Description": "HVAC temperature"
+                },
+                {
+                  "$type": "Humidity",
+                  "SensorId": "9c0d1e2f-3a4b-45c6-7d8e-9f0a1b2c3d4e",
+                  "SensorType": "Humidity",
+                  "Description": "HVAC humidity"
+                },
+                {
+                  "$type": "Acceleration",
+                  "SensorId": "0d1e2f3a-4b5c-46d7-8e9f-0a1b2c3d4e5f",
+                  "SensorType": "Acceleration",
+                  "Description": "HVAC max acceleration"
+                },
+                {
+                  "$type": "Voltage",
+                  "SensorId": "1e2f3a4b-5c6d-47e8-9f0a-1b2c3d4e5f6a",
+                  "SensorType": "Voltage",
+                  "Description": "HVAC battery voltage"
+                },
+                {
+                  "$type": "DeviceModel",
+                  "SensorId": "2f3a4b5c-6d7e-48f9-0a1b-2c3d4e5f6a7b",
+                  "SensorType": "DeviceModel",
+                  "Description": "HVAC device model"
+                },
+                {
+                  "$type": "Firmware",
+                  "SensorId": "3a4b5c6d-7e8f-490a-1b2c-3d4e5f6a7b8c",
+                  "SensorType": "Firmware",
+                  "Description": "HVAC firmware version"
+                },
+                {
+                  "$type": "RadioConfig",
+                  "SensorId": "4b5c6d7e-8f9a-400b-2c3d-4e5f6a7b8c9d",
+                  "SensorType": "RadioConfig",
+                  "Description": "HVAC LoRa config"
+                },
+                {
+                  "$type": "Gateway",
+                  "SensorId": "5c6d7e8f-9a0b-411c-3d4e-5f6a7b8c9d0e",
+                  "SensorType": "Gateway",
+                  "Description": "HVAC gateway info"
+                }
+              ],
+              "DeviceId": "a8404134095f3c52"
             }
           ],
           "GatewayIds": [

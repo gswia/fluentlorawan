@@ -13,6 +13,8 @@ namespace IotHubFunction.Configuration
     [JsonDerivedType(typeof(IotHubFunction.Sensors.GatewaySensor), typeDiscriminator: "Gateway")]
     [JsonDerivedType(typeof(IotHubFunction.Sensors.TemperatureProbeSensor), typeDiscriminator: "TemperatureProbe")]
     [JsonDerivedType(typeof(IotHubFunction.Sensors.DoorSensor), typeDiscriminator: "Door")]
+    [JsonDerivedType(typeof(IotHubFunction.Sensors.VibrationSensor), typeDiscriminator: "Vibration")]
+    [JsonDerivedType(typeof(IotHubFunction.Sensors.AccelerationSensor), typeDiscriminator: "Acceleration")]
     public abstract class Sensor
     {
         public Guid SensorId { get; set; }
