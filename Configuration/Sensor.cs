@@ -6,6 +6,7 @@ namespace IotHubFunction.Configuration
     [JsonDerivedType(typeof(IotHubFunction.Sensors.TemperatureSensor), typeDiscriminator: "Temperature")]
     [JsonDerivedType(typeof(IotHubFunction.Sensors.HumiditySensor), typeDiscriminator: "Humidity")]
     [JsonDerivedType(typeof(IotHubFunction.Sensors.VoltageSensor), typeDiscriminator: "Voltage")]
+    [JsonDerivedType(typeof(IotHubFunction.Sensors.IlluminationSensor), typeDiscriminator: "Illumination")]
     [JsonDerivedType(typeof(IotHubFunction.Sensors.DeviceModelSensor), typeDiscriminator: "DeviceModel")]
     [JsonDerivedType(typeof(IotHubFunction.Sensors.FirmwareSensor), typeDiscriminator: "Firmware")]
     [JsonDerivedType(typeof(IotHubFunction.Sensors.RadioConfigSensor), typeDiscriminator: "RadioConfig")]

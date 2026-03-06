@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 namespace IotHubFunction.Configuration
 {
     [JsonDerivedType(typeof(LHT52Device), typeDiscriminator: "LHT52")]
+    [JsonDerivedType(typeof(LHT65NDevice), typeDiscriminator: "LHT65N")]
     public abstract class Device
     {
         public string DeviceId { get; set; } = string.Empty;

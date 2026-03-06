@@ -4,11 +4,11 @@ using System.Text.Json;
 
 namespace IotHubFunction.Sensors
 {
-    public class TemperatureSensor : Sensor
+    public class IlluminationSensor : Sensor
     {
-        public TemperatureSensor()
+        public IlluminationSensor()
         {
-            SensorType = "Temperature";
+            SensorType = "Illumination";
         }
 
         public override List<Reading> CreateReadings(
@@ -21,23 +21,14 @@ namespace IotHubFunction.Sensors
             Device device)
         {
             if (message.FPort != 2 || message.Object == null) return new List<Reading>();
-            if (!message.Object.ContainsKey("TempC_SHT")) return new List<Reading>();
+            if (!message.Object.ContainsKey("ILL_lx")) return new List<Reading>();
 
-            // Use Systimestamp if available (LHT52), otherwise use message timestamp (LHT65N)
-            DateTime deviceTimestamp;
-            if (message.Object.ContainsKey("Systimestamp"))
-            {
-                var systimestamp = (long)((JsonElement)message.Object["Systimestamp"]).GetDouble();
-                deviceTimestamp = DateTimeOffset.FromUnixTimeSeconds(systimestamp).UtcDateTime;
-            }
-            else
-            {
-                deviceTimestamp = message.Time.ToUniversalTime();
-            }
+            // LHT65N doesn't include Systimestamp for illumination readings, use message timestamp
+            var deviceTimestamp = message.Time.ToUniversalTime();
 
             return new List<Reading>
             {
-                new Temperature
+                new Illumination
                 {
                     TimestampUTC = deviceTimestamp,
                     AccountId = accountId,
@@ -46,7 +37,7 @@ namespace IotHubFunction.Sensors
                     DeviceId = deviceId,
                     MessageId = messageId,
                     SensorId = SensorId.ToString(),
-                    ValueC = ((JsonElement)message.Object["TempC_SHT"]).GetDouble()
+                    ValueLux = ((JsonElement)message.Object["ILL_lx"]).GetDouble()
                 }
             };
         }

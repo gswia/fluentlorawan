@@ -20,14 +20,27 @@ namespace IotHubFunction.Sensors
             string messageId,
             Device device)
         {
-            if (message.FPort != 5 || message.Object == null) return new List<Reading>();
+            // Battery voltage can appear in fPort 2 (LHT65N regular messages) or fPort 5 (configuration messages)
+            if ((message.FPort != 2 && message.FPort != 5) || message.Object == null) return new List<Reading>();
             if (!message.Object.ContainsKey("Bat_mV")) return new List<Reading>();
+
+            // Use Systimestamp if available (LHT52), otherwise use message timestamp (LHT65N or fPort 5)
+            DateTime deviceTimestamp;
+            if (message.Object.ContainsKey("Systimestamp"))
+            {
+                var systimestamp = (long)((JsonElement)message.Object["Systimestamp"]).GetDouble();
+                deviceTimestamp = DateTimeOffset.FromUnixTimeSeconds(systimestamp).UtcDateTime;
+            }
+            else
+            {
+                deviceTimestamp = message.Time.ToUniversalTime();
+            }
 
             return new List<Reading>
             {
                 new Voltage
                 {
-                    TimestampUTC = message.Time,
+                    TimestampUTC = deviceTimestamp,
                     AccountId = accountId,
                     ApplicationId = applicationId,
                     SiteId = siteId,

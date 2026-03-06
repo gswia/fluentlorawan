@@ -105,57 +105,15 @@ function Decode(fPort, bytes, variables) {
     return decode;
   }
   else if (fPort == 5) {
-    var sub_band;
-    var freq_band;
-    var sensor;
-
-    if (bytes[0] == 0x0B)
-      sensor = "LHT65N";
-    else if (bytes[0] == 0x1A)
-      sensor = "LHT65N-PIR";
-
-    if (bytes[4] == 0xff)
-      sub_band = "NULL";
-    else
-      sub_band = bytes[4];
-
-    if (bytes[3] == 0x01)
-      freq_band = "EU868";
-    else if (bytes[3] == 0x02)
-      freq_band = "US915";
-    else if (bytes[3] == 0x03)
-      freq_band = "IN865";
-    else if (bytes[3] == 0x04)
-      freq_band = "AU915";
-    else if (bytes[3] == 0x05)
-      freq_band = "KZ865";
-    else if (bytes[3] == 0x06)
-      freq_band = "RU864";
-    else if (bytes[3] == 0x07)
-      freq_band = "AS923";
-    else if (bytes[3] == 0x08)
-      freq_band = "AS923_1";
-    else if (bytes[3] == 0x09)
-      freq_band = "AS923_2";
-    else if (bytes[3] == 0x0A)
-      freq_band = "AS923_3";
-    else if (bytes[3] == 0x0B)
-      freq_band = "CN470";
-    else if (bytes[3] == 0x0C)
-      freq_band = "EU433";
-    else if (bytes[3] == 0x0D)
-      freq_band = "KR920";
-    else if (bytes[3] == 0x0E)
-      freq_band = "MA869";
-
+    // Return raw byte values to match LHT52 format
     var firm_ver = (bytes[1] & 0x0f) + '.' + (bytes[2] >> 4 & 0x0f) + '.' + (bytes[2] & 0x0f);
     var bat = bytes[5] << 8 | bytes[6];
 
     return {
-      Sensor_Model: sensor,
+      Sensor_Model: bytes[0],
       Firmware_Version: firm_ver,
-      Freq_Band: freq_band,
-      Sub_Band: sub_band,
+      Freq_Band: bytes[3],
+      Sub_Band: bytes[4],
       Bat_mV: bat,
     };
   }

@@ -4,7 +4,8 @@ namespace IotHubFunction.Configuration
     {
         private static readonly Dictionary<string, Func<Device>> _deviceTypes = new()
         {
-            { "LHT52", () => new LHT52Device() }
+            { "LHT52", () => new LHT52Device() },
+            { "LHT65N", () => new LHT65NDevice() }
         };
 
         public static Device Create(string deviceProfileName)

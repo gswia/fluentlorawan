@@ -21,10 +21,19 @@ namespace IotHubFunction.Sensors
             Device device)
         {
             if (message.FPort != 2 || message.Object == null) return new List<Reading>();
-            if (!message.Object.ContainsKey("Hum_SHT") || !message.Object.ContainsKey("Systimestamp")) return new List<Reading>();
+            if (!message.Object.ContainsKey("Hum_SHT")) return new List<Reading>();
 
-            var systimestamp = (long)((JsonElement)message.Object["Systimestamp"]).GetDouble();
-            var deviceTimestamp = DateTimeOffset.FromUnixTimeSeconds(systimestamp).UtcDateTime;
+            // Use Systimestamp if available (LHT52), otherwise use message timestamp (LHT65N)
+            DateTime deviceTimestamp;
+            if (message.Object.ContainsKey("Systimestamp"))
+            {
+                var systimestamp = (long)((JsonElement)message.Object["Systimestamp"]).GetDouble();
+                deviceTimestamp = DateTimeOffset.FromUnixTimeSeconds(systimestamp).UtcDateTime;
+            }
+            else
+            {
+                deviceTimestamp = message.Time.ToUniversalTime();
+            }
 
             return new List<Reading>
             {
