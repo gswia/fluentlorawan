@@ -10,6 +10,9 @@
     <Compile Remove="MessageFlowTest\**\*.cs" />
     <EmbeddedResource Remove="MessageFlowTest\**\*" />
     <None Remove="MessageFlowTest\**\*" />
+    <Compile Remove="TrackerWorker\**\*.cs" />
+    <EmbeddedResource Remove="TrackerWorker\**\*" />
+    <None Remove="TrackerWorker\**\*" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Data.Tables" Version="12.11.0" />
