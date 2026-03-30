@@ -24,10 +24,6 @@
 			],
 			"type": "process",
 			"dependsOn": "clean (functions)",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
 			"problemMatcher": "$msCompile"
 		},
 		{
@@ -40,6 +36,22 @@
 				"/consoleloggerparameters:NoSummary"
 			],
 			"type": "process",
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "build-decoder",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"${workspaceFolder}/packages/EelinkDecoder/EelinkDecoder.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"type": "process",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
 			"problemMatcher": "$msCompile"
 		},
 		{

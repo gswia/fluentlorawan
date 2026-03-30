@@ -13,6 +13,9 @@
     <Compile Remove="TrackerWorker\**\*.cs" />
     <EmbeddedResource Remove="TrackerWorker\**\*" />
     <None Remove="TrackerWorker\**\*" />
+    <Compile Remove="EelinkTcpWorker\**\*.cs" />
+    <EmbeddedResource Remove="EelinkTcpWorker\**\*" />
+    <None Remove="EelinkTcpWorker\**\*" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Data.Tables" Version="12.11.0" />
