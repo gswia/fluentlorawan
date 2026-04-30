@@ -2,6 +2,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug EelinkDecoder",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-decoder",
+            "program": "${workspaceFolder}/packages/EelinkDecoder/bin/Debug/net8.0/EelinkDecoder.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/packages/EelinkDecoder",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
             "name": "Debug MessageFlowTest",
             "type": "coreclr",
             "request": "launch",

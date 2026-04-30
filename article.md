@@ -1,0 +1,1 @@
+Most people building AI analytics do the same thing: pipe some data into a prompt, ask the model to figure it out, and then spend time tweaking the prompt when the output is vague. The model gets blamed, the prompt gets longer and the results stay mediocre.

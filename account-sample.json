@@ -1,468 +1,468 @@
 {
-  "AccountId": "8f4a2e7c-5b1d-4f89-a3c6-9d8e7f6a5b4c",
-  "Applications": [
-    {
-      "Sites": [
+    "AccountId": "8f4a2e7c-5b1d-4f89-a3c6-9d8e7f6a5b4c",
+    "Applications": [
         {
-          "SiteId": "3c8f9a2e-7d4b-4e1f-9a5c-2b8e7f6a9d3c",
-          "Devices": [
-            {
-              "$type": "LHT52",
-              "Sensors": [
+            "Sites": [
                 {
-                  "$type": "Temperature",
-                  "SensorId": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
-                  "SensorType": "Temperature",
-                  "Description": "Bedroom 2 temperature"
-                },
-                {
-                  "$type": "Humidity",
-                  "SensorId": "2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e",
-                  "SensorType": "Humidity",
-                  "Description": "Bedroom 2 humidity"
-                },
-                {
-                  "$type": "Voltage",
-                  "SensorId": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
-                  "SensorType": "Voltage",
-                  "Description": "Bedroom 2 battery voltage"
-                },
-                {
-                  "$type": "DeviceModel",
-                  "SensorId": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
-                  "SensorType": "DeviceModel",
-                  "Description": "Bedroom 2 device model"
-                },
-                {
-                  "$type": "Firmware",
-                  "SensorId": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f",
-                  "SensorType": "Firmware",
-                  "Description": "Bedroom 2 firmware version"
-                },
-                {
-                  "$type": "RadioConfig",
-                  "SensorId": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a",
-                  "SensorType": "RadioConfig",
-                  "Description": "Bedroom 2 LoRa config"
-                },
-                {
-                  "$type": "Gateway",
-                  "SensorId": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b",
-                  "SensorType": "Gateway",
-                  "Description": "Bedroom 2 gateway info"
+                    "SiteId": "3c8f9a2e-7d4b-4e1f-9a5c-2b8e7f6a9d3c",
+                    "Devices": [
+                        {
+                            "$type": "LHT52",
+                            "Sensors": [
+                                {
+                                    "$type": "Temperature",
+                                    "SensorId": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+                                    "SensorType": "Temperature",
+                                    "Description": "Bedroom 2 temperature"
+                                },
+                                {
+                                    "$type": "Humidity",
+                                    "SensorId": "2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e",
+                                    "SensorType": "Humidity",
+                                    "Description": "Bedroom 2 humidity"
+                                },
+                                {
+                                    "$type": "Voltage",
+                                    "SensorId": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+                                    "SensorType": "Voltage",
+                                    "Description": "Bedroom 2 battery voltage"
+                                },
+                                {
+                                    "$type": "DeviceModel",
+                                    "SensorId": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
+                                    "SensorType": "DeviceModel",
+                                    "Description": "Bedroom 2 device model"
+                                },
+                                {
+                                    "$type": "Firmware",
+                                    "SensorId": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f",
+                                    "SensorType": "Firmware",
+                                    "Description": "Bedroom 2 firmware version"
+                                },
+                                {
+                                    "$type": "RadioConfig",
+                                    "SensorId": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a",
+                                    "SensorType": "RadioConfig",
+                                    "Description": "Bedroom 2 LoRa config"
+                                },
+                                {
+                                    "$type": "Gateway",
+                                    "SensorId": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b",
+                                    "SensorType": "Gateway",
+                                    "Description": "Bedroom 2 gateway info"
+                                }
+                            ],
+                            "DeviceId": "a8404155476006c8"
+                        },
+                        {
+                            "$type": "LHT52",
+                            "Sensors": [
+                                {
+                                    "$type": "Temperature",
+                                    "SensorId": "3c4d5e6f-7a8b-4c9d-0e1f-2a3b4c5d6e7f",
+                                    "SensorType": "Temperature",
+                                    "Description": "Living room temperature"
+                                },
+                                {
+                                    "$type": "Humidity",
+                                    "SensorId": "4d5e6f7a-8b9c-4d0e-1f2a-3b4c5d6e7f8a",
+                                    "SensorType": "Humidity",
+                                    "Description": "Living room humidity"
+                                },
+                                {
+                                    "$type": "Voltage",
+                                    "SensorId": "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c",
+                                    "SensorType": "Voltage",
+                                    "Description": "Living room battery voltage"
+                                },
+                                {
+                                    "$type": "DeviceModel",
+                                    "SensorId": "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d",
+                                    "SensorType": "DeviceModel",
+                                    "Description": "Living room device model"
+                                },
+                                {
+                                    "$type": "Firmware",
+                                    "SensorId": "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e",
+                                    "SensorType": "Firmware",
+                                    "Description": "Living room firmware version"
+                                },
+                                {
+                                    "$type": "RadioConfig",
+                                    "SensorId": "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f",
+                                    "SensorType": "RadioConfig",
+                                    "Description": "Living room LoRa config"
+                                },
+                                {
+                                    "$type": "Gateway",
+                                    "SensorId": "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a",
+                                    "SensorType": "Gateway",
+                                    "Description": "Living room gateway info"
+                                }
+                            ],
+                            "DeviceId": "a8404122c96006e4"
+                        },
+                        {
+                            "$type": "LHT52",
+                            "Sensors": [
+                                {
+                                    "$type": "Temperature",
+                                    "SensorId": "5e6f7a8b-9c0d-4e1f-2a3b-4c5d6e7f8a9b",
+                                    "SensorType": "Temperature",
+                                    "Description": "Bedroom 4 temperature"
+                                },
+                                {
+                                    "$type": "Humidity",
+                                    "SensorId": "6f7a8b9c-0d1e-4f2a-3b4c-5d6e7f8a9b0c",
+                                    "SensorType": "Humidity",
+                                    "Description": "Bedroom 4 humidity"
+                                },
+                                {
+                                    "$type": "Voltage",
+                                    "SensorId": "e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b",
+                                    "SensorType": "Voltage",
+                                    "Description": "Bedroom 4 battery voltage"
+                                },
+                                {
+                                    "$type": "DeviceModel",
+                                    "SensorId": "f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c",
+                                    "SensorType": "DeviceModel",
+                                    "Description": "Bedroom 4 device model"
+                                },
+                                {
+                                    "$type": "Firmware",
+                                    "SensorId": "a3b4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7d",
+                                    "SensorType": "Firmware",
+                                    "Description": "Bedroom 4 firmware version"
+                                },
+                                {
+                                    "$type": "RadioConfig",
+                                    "SensorId": "b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e",
+                                    "SensorType": "RadioConfig",
+                                    "Description": "Bedroom 4 LoRa config"
+                                },
+                                {
+                                    "$type": "Gateway",
+                                    "SensorId": "c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f",
+                                    "SensorType": "Gateway",
+                                    "Description": "Bedroom 4 gateway info"
+                                }
+                            ],
+                            "DeviceId": "a840411d136006d7"
+                        },
+                        {
+                            "$type": "LHT52",
+                            "Sensors": [
+                                {
+                                    "$type": "Temperature",
+                                    "SensorId": "7a8b9c0d-1e2f-4a3b-4c5d-6e7f8a9b0c1d",
+                                    "SensorType": "Temperature",
+                                    "Description": "Bedroom 3 temperature"
+                                },
+                                {
+                                    "$type": "Humidity",
+                                    "SensorId": "8b9c0d1e-2f3a-4b4c-5d6e-7f8a9b0c1d2e",
+                                    "SensorType": "Humidity",
+                                    "Description": "Bedroom 3 humidity"
+                                },
+                                {
+                                    "$type": "Voltage",
+                                    "SensorId": "d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a",
+                                    "SensorType": "Voltage",
+                                    "Description": "Bedroom 3 battery voltage"
+                                },
+                                {
+                                    "$type": "DeviceModel",
+                                    "SensorId": "e7f8a9b0-c1d2-4e3f-4a5b-6c7d8e9f0a1b",
+                                    "SensorType": "DeviceModel",
+                                    "Description": "Bedroom 3 device model"
+                                },
+                                {
+                                    "$type": "Firmware",
+                                    "SensorId": "f8a9b0c1-d2e3-4f4a-5b6c-7d8e9f0a1b2c",
+                                    "SensorType": "Firmware",
+                                    "Description": "Bedroom 3 firmware version"
+                                },
+                                {
+                                    "$type": "RadioConfig",
+                                    "SensorId": "a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d",
+                                    "SensorType": "RadioConfig",
+                                    "Description": "Bedroom 3 LoRa config"
+                                },
+                                {
+                                    "$type": "Gateway",
+                                    "SensorId": "b0c1d2e3-f4a5-4b6c-7d8e-9f0a1b2c3d4e",
+                                    "SensorType": "Gateway",
+                                    "Description": "Bedroom 3 gateway info"
+                                }
+                            ],
+                            "DeviceId": "a840418b4b6006cd"
+                        },
+                        {
+                            "$type": "LHT52",
+                            "Sensors": [
+                                {
+                                    "$type": "Temperature",
+                                    "SensorId": "9c0d1e2f-3a4b-4c5d-6e7f-8a9b0c1d2e3f",
+                                    "SensorType": "Temperature",
+                                    "Description": "Master bedroom temperature"
+                                },
+                                {
+                                    "$type": "Humidity",
+                                    "SensorId": "0d1e2f3a-4b5c-4d6e-7f8a-9b0c1d2e3f4a",
+                                    "SensorType": "Humidity",
+                                    "Description": "Master bedroom humidity"
+                                },
+                                {
+                                    "$type": "Voltage",
+                                    "SensorId": "c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f",
+                                    "SensorType": "Voltage",
+                                    "Description": "Master bedroom battery voltage"
+                                },
+                                {
+                                    "$type": "DeviceModel",
+                                    "SensorId": "d2e3f4a5-b6c7-4d8e-9f0a-1b2c3d4e5f6a",
+                                    "SensorType": "DeviceModel",
+                                    "Description": "Master bedroom device model"
+                                },
+                                {
+                                    "$type": "Firmware",
+                                    "SensorId": "e3f4a5b6-c7d8-4e9f-0a1b-2c3d4e5f6a7b",
+                                    "SensorType": "Firmware",
+                                    "Description": "Master bedroom firmware version"
+                                },
+                                {
+                                    "$type": "RadioConfig",
+                                    "SensorId": "f4a5b6c7-d8e9-4f0a-1b2c-3d4e5f6a7b8c",
+                                    "SensorType": "RadioConfig",
+                                    "Description": "Master bedroom LoRa config"
+                                },
+                                {
+                                    "$type": "Gateway",
+                                    "SensorId": "a5b6c7d8-e9f0-4a1b-2c3d-4e5f6a7b8c9d",
+                                    "SensorType": "Gateway",
+                                    "Description": "Master bedroom gateway info"
+                                }
+                            ],
+                            "DeviceId": "a84041224a600684"
+                        },
+                        {
+                            "$type": "LHT65N",
+                            "Sensors": [
+                                {
+                                    "$type": "Temperature",
+                                    "SensorId": "1f2e3d4c-5b6a-4798-8e9d-0c1f2e3d4c5b",
+                                    "SensorType": "Temperature",
+                                    "Description": "Garage temperature"
+                                },
+                                {
+                                    "$type": "Humidity",
+                                    "SensorId": "2e3d4c5b-6a79-48e9-d0c1-f2e3d4c5b6a7",
+                                    "SensorType": "Humidity",
+                                    "Description": "Garage humidity"
+                                },
+                                {
+                                    "$type": "Voltage",
+                                    "SensorId": "3d4c5b6a-798e-49d0-c1f2-e3d4c5b6a798",
+                                    "SensorType": "Voltage",
+                                    "Description": "Garage battery voltage"
+                                },
+                                {
+                                    "$type": "DeviceModel",
+                                    "SensorId": "4c5b6a79-8e9d-40c1-f2e3-d4c5b6a798e9",
+                                    "SensorType": "DeviceModel",
+                                    "Description": "Garage device model"
+                                },
+                                {
+                                    "$type": "Firmware",
+                                    "SensorId": "5b6a798e-9d0c-41f2-e3d4-c5b6a798e9d0",
+                                    "SensorType": "Firmware",
+                                    "Description": "Garage firmware version"
+                                },
+                                {
+                                    "$type": "RadioConfig",
+                                    "SensorId": "6a798e9d-0c1f-42e3-d4c5-b6a798e9d0c1",
+                                    "SensorType": "RadioConfig",
+                                    "Description": "Garage LoRa config"
+                                },
+                                {
+                                    "$type": "Gateway",
+                                    "SensorId": "798e9d0c-1f2e-43d4-c5b6-a798e9d0c1f2",
+                                    "SensorType": "Gateway",
+                                    "Description": "Garage gateway info"
+                                }
+                            ],
+                            "DeviceId": "a8404101da5f3677"
+                        },
+                        {
+                            "$type": "LHT65N",
+                            "Sensors": [
+                                {
+                                    "$type": "Temperature",
+                                    "SensorId": "8e9d0c1f-2e3d-44c5-b6a7-98e9d0c1f2e3",
+                                    "SensorType": "Temperature",
+                                    "Description": "Outdoor temperature"
+                                },
+                                {
+                                    "$type": "Humidity",
+                                    "SensorId": "9d0c1f2e-3d4c-45b6-a798-e9d0c1f2e3d4",
+                                    "SensorType": "Humidity",
+                                    "Description": "Outdoor humidity"
+                                },
+                                {
+                                    "$type": "Voltage",
+                                    "SensorId": "0c1f2e3d-4c5b-46a7-98e9-d0c1f2e3d4c5",
+                                    "SensorType": "Voltage",
+                                    "Description": "Outdoor battery voltage"
+                                },
+                                {
+                                    "$type": "Illumination",
+                                    "SensorId": "1f2e3d4c-5b6a-4798-e9d0-c1f2e3d4c5b6",
+                                    "SensorType": "Illumination",
+                                    "Description": "Outdoor illumination"
+                                },
+                                {
+                                    "$type": "DeviceModel",
+                                    "SensorId": "4e6ce77a-6945-4fc3-9eeb-108a1e06689a",
+                                    "SensorType": "DeviceModel",
+                                    "Description": "Outdoor device model"
+                                },
+                                {
+                                    "$type": "Firmware",
+                                    "SensorId": "05b478b9-97c8-4965-8f4d-028231528221",
+                                    "SensorType": "Firmware",
+                                    "Description": "Outdoor firmware version"
+                                },
+                                {
+                                    "$type": "RadioConfig",
+                                    "SensorId": "6e7ff32e-8640-4296-b78a-ba3987eb9ff8",
+                                    "SensorType": "RadioConfig",
+                                    "Description": "Outdoor LoRa config"
+                                },
+                                {
+                                    "$type": "Gateway",
+                                    "SensorId": "486a85c5-5666-4ded-9b97-223cbeb61d13",
+                                    "SensorType": "Gateway",
+                                    "Description": "Outdoor gateway info"
+                                }
+                            ],
+                            "DeviceId": "a84041c10b5ff491"
+                        },
+                        {
+                            "$type": "LDS02",
+                            "Sensors": [
+                                {
+                                    "$type": "Door",
+                                    "SensorId": "a1b2c3d4-e5f6-47a8-9b0c-1d2e3f4a5b6c",
+                                    "SensorType": "Door",
+                                    "Description": "Front door status"
+                                },
+                                {
+                                    "$type": "Voltage",
+                                    "SensorId": "b2c3d4e5-f6a7-48b9-0c1d-2e3f4a5b6c7d",
+                                    "SensorType": "Voltage",
+                                    "Description": "Front door battery voltage"
+                                },
+                                {
+                                    "$type": "Gateway",
+                                    "SensorId": "f6a7b8c9-d0e1-42f3-4a5b-6c7d8e9f0a1b",
+                                    "SensorType": "Gateway",
+                                    "Description": "Front door gateway info"
+                                }
+                            ],
+                            "DeviceId": "a8404136995ea57b"
+                        },
+                        {
+                            "$type": "LDS02",
+                            "Sensors": [
+                                {
+                                    "$type": "Door",
+                                    "SensorId": "1a2b3c4d-5e6f-47a8-9b0c-1d2e3f4a5b6c",
+                                    "SensorType": "Door",
+                                    "Description": "Patio door status"
+                                },
+                                {
+                                    "$type": "Voltage",
+                                    "SensorId": "2b3c4d5e-6f7a-48b9-0c1d-2e3f4a5b6c7d",
+                                    "SensorType": "Voltage",
+                                    "Description": "Patio door battery voltage"
+                                },
+                                {
+                                    "$type": "Gateway",
+                                    "SensorId": "6f7a8b9c-0d1e-42f3-4a5b-6c7d8e9f0a1b",
+                                    "SensorType": "Gateway",
+                                    "Description": "Patio door gateway info"
+                                }
+                            ],
+                            "DeviceId": "a8404178215ea57c"
+                        },
+                        {
+                            "$type": "LHT65NVIB",
+                            "Sensors": [
+                                {
+                                    "$type": "Vibration",
+                                    "SensorId": "7a8b9c0d-1e2f-43a4-5b6c-7d8e9f0a1b2c",
+                                    "SensorType": "Vibration",
+                                    "Description": "HVAC vibration monitoring"
+                                },
+                                {
+                                    "$type": "Temperature",
+                                    "SensorId": "8b9c0d1e-2f3a-44b5-6c7d-8e9f0a1b2c3d",
+                                    "SensorType": "Temperature",
+                                    "Description": "HVAC temperature"
+                                },
+                                {
+                                    "$type": "Humidity",
+                                    "SensorId": "9c0d1e2f-3a4b-45c6-7d8e-9f0a1b2c3d4e",
+                                    "SensorType": "Humidity",
+                                    "Description": "HVAC humidity"
+                                },
+                                {
+                                    "$type": "Acceleration",
+                                    "SensorId": "0d1e2f3a-4b5c-46d7-8e9f-0a1b2c3d4e5f",
+                                    "SensorType": "Acceleration",
+                                    "Description": "HVAC max acceleration"
+                                },
+                                {
+                                    "$type": "Voltage",
+                                    "SensorId": "1e2f3a4b-5c6d-47e8-9f0a-1b2c3d4e5f6a",
+                                    "SensorType": "Voltage",
+                                    "Description": "HVAC battery voltage"
+                                },
+                                {
+                                    "$type": "DeviceModel",
+                                    "SensorId": "2f3a4b5c-6d7e-48f9-0a1b-2c3d4e5f6a7b",
+                                    "SensorType": "DeviceModel",
+                                    "Description": "HVAC device model"
+                                },
+                                {
+                                    "$type": "Firmware",
+                                    "SensorId": "3a4b5c6d-7e8f-490a-1b2c-3d4e5f6a7b8c",
+                                    "SensorType": "Firmware",
+                                    "Description": "HVAC firmware version"
+                                },
+                                {
+                                    "$type": "RadioConfig",
+                                    "SensorId": "4b5c6d7e-8f9a-400b-2c3d-4e5f6a7b8c9d",
+                                    "SensorType": "RadioConfig",
+                                    "Description": "HVAC LoRa config"
+                                },
+                                {
+                                    "$type": "Gateway",
+                                    "SensorId": "5c6d7e8f-9a0b-411c-3d4e-5f6a7b8c9d0e",
+                                    "SensorType": "Gateway",
+                                    "Description": "HVAC gateway info"
+                                }
+                            ],
+                            "DeviceId": "a8404134095f3c52"
+                        }
+                    ],
+                    "GatewayIds": [
+                        "2cf7f11173000049"
+                    ]
                 }
-              ],
-              "DeviceId": "a8404155476006c8"
-            },
-            {
-              "$type": "LHT52",
-              "Sensors": [
-                {
-                  "$type": "Temperature",
-                  "SensorId": "3c4d5e6f-7a8b-4c9d-0e1f-2a3b4c5d6e7f",
-                  "SensorType": "Temperature",
-                  "Description": "Living room temperature"
-                },
-                {
-                  "$type": "Humidity",
-                  "SensorId": "4d5e6f7a-8b9c-4d0e-1f2a-3b4c5d6e7f8a",
-                  "SensorType": "Humidity",
-                  "Description": "Living room humidity"
-                },
-                {
-                  "$type": "Voltage",
-                  "SensorId": "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c",
-                  "SensorType": "Voltage",
-                  "Description": "Living room battery voltage"
-                },
-                {
-                  "$type": "DeviceModel",
-                  "SensorId": "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d",
-                  "SensorType": "DeviceModel",
-                  "Description": "Living room device model"
-                },
-                {
-                  "$type": "Firmware",
-                  "SensorId": "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e",
-                  "SensorType": "Firmware",
-                  "Description": "Living room firmware version"
-                },
-                {
-                  "$type": "RadioConfig",
-                  "SensorId": "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f",
-                  "SensorType": "RadioConfig",
-                  "Description": "Living room LoRa config"
-                },
-                {
-                  "$type": "Gateway",
-                  "SensorId": "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a",
-                  "SensorType": "Gateway",
-                  "Description": "Living room gateway info"
-                }
-              ],
-              "DeviceId": "a8404122c96006e4"
-            },
-            {
-              "$type": "LHT52",
-              "Sensors": [
-                {
-                  "$type": "Temperature",
-                  "SensorId": "5e6f7a8b-9c0d-4e1f-2a3b-4c5d6e7f8a9b",
-                  "SensorType": "Temperature",
-                  "Description": "Bedroom 4 temperature"
-                },
-                {
-                  "$type": "Humidity",
-                  "SensorId": "6f7a8b9c-0d1e-4f2a-3b4c-5d6e7f8a9b0c",
-                  "SensorType": "Humidity",
-                  "Description": "Bedroom 4 humidity"
-                },
-                {
-                  "$type": "Voltage",
-                  "SensorId": "e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b",
-                  "SensorType": "Voltage",
-                  "Description": "Bedroom 4 battery voltage"
-                },
-                {
-                  "$type": "DeviceModel",
-                  "SensorId": "f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c",
-                  "SensorType": "DeviceModel",
-                  "Description": "Bedroom 4 device model"
-                },
-                {
-                  "$type": "Firmware",
-                  "SensorId": "a3b4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7d",
-                  "SensorType": "Firmware",
-                  "Description": "Bedroom 4 firmware version"
-                },
-                {
-                  "$type": "RadioConfig",
-                  "SensorId": "b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e",
-                  "SensorType": "RadioConfig",
-                  "Description": "Bedroom 4 LoRa config"
-                },
-                {
-                  "$type": "Gateway",
-                  "SensorId": "c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f",
-                  "SensorType": "Gateway",
-                  "Description": "Bedroom 4 gateway info"
-                }
-              ],
-              "DeviceId": "a840411d136006d7"
-            },
-            {
-              "$type": "LHT52",
-              "Sensors": [
-                {
-                  "$type": "Temperature",
-                  "SensorId": "7a8b9c0d-1e2f-4a3b-4c5d-6e7f8a9b0c1d",
-                  "SensorType": "Temperature",
-                  "Description": "Bedroom 3 temperature"
-                },
-                {
-                  "$type": "Humidity",
-                  "SensorId": "8b9c0d1e-2f3a-4b4c-5d6e-7f8a9b0c1d2e",
-                  "SensorType": "Humidity",
-                  "Description": "Bedroom 3 humidity"
-                },
-                {
-                  "$type": "Voltage",
-                  "SensorId": "d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a",
-                  "SensorType": "Voltage",
-                  "Description": "Bedroom 3 battery voltage"
-                },
-                {
-                  "$type": "DeviceModel",
-                  "SensorId": "e7f8a9b0-c1d2-4e3f-4a5b-6c7d8e9f0a1b",
-                  "SensorType": "DeviceModel",
-                  "Description": "Bedroom 3 device model"
-                },
-                {
-                  "$type": "Firmware",
-                  "SensorId": "f8a9b0c1-d2e3-4f4a-5b6c-7d8e9f0a1b2c",
-                  "SensorType": "Firmware",
-                  "Description": "Bedroom 3 firmware version"
-                },
-                {
-                  "$type": "RadioConfig",
-                  "SensorId": "a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d",
-                  "SensorType": "RadioConfig",
-                  "Description": "Bedroom 3 LoRa config"
-                },
-                {
-                  "$type": "Gateway",
-                  "SensorId": "b0c1d2e3-f4a5-4b6c-7d8e-9f0a1b2c3d4e",
-                  "SensorType": "Gateway",
-                  "Description": "Bedroom 3 gateway info"
-                }
-              ],
-              "DeviceId": "a840418b4b6006cd"
-            },
-            {
-              "$type": "LHT52",
-              "Sensors": [
-                {
-                  "$type": "Temperature",
-                  "SensorId": "9c0d1e2f-3a4b-4c5d-6e7f-8a9b0c1d2e3f",
-                  "SensorType": "Temperature",
-                  "Description": "Master bedroom temperature"
-                },
-                {
-                  "$type": "Humidity",
-                  "SensorId": "0d1e2f3a-4b5c-4d6e-7f8a-9b0c1d2e3f4a",
-                  "SensorType": "Humidity",
-                  "Description": "Master bedroom humidity"
-                },
-                {
-                  "$type": "Voltage",
-                  "SensorId": "c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f",
-                  "SensorType": "Voltage",
-                  "Description": "Master bedroom battery voltage"
-                },
-                {
-                  "$type": "DeviceModel",
-                  "SensorId": "d2e3f4a5-b6c7-4d8e-9f0a-1b2c3d4e5f6a",
-                  "SensorType": "DeviceModel",
-                  "Description": "Master bedroom device model"
-                },
-                {
-                  "$type": "Firmware",
-                  "SensorId": "e3f4a5b6-c7d8-4e9f-0a1b-2c3d4e5f6a7b",
-                  "SensorType": "Firmware",
-                  "Description": "Master bedroom firmware version"
-                },
-                {
-                  "$type": "RadioConfig",
-                  "SensorId": "f4a5b6c7-d8e9-4f0a-1b2c-3d4e5f6a7b8c",
-                  "SensorType": "RadioConfig",
-                  "Description": "Master bedroom LoRa config"
-                },
-                {
-                  "$type": "Gateway",
-                  "SensorId": "a5b6c7d8-e9f0-4a1b-2c3d-4e5f6a7b8c9d",
-                  "SensorType": "Gateway",
-                  "Description": "Master bedroom gateway info"
-                }
-              ],
-              "DeviceId": "a84041224a600684"
-            },
-            {
-              "$type": "LHT65N",
-              "Sensors": [
-                {
-                  "$type": "Temperature",
-                  "SensorId": "1f2e3d4c-5b6a-4798-8e9d-0c1f2e3d4c5b",
-                  "SensorType": "Temperature",
-                  "Description": "Garage temperature"
-                },
-                {
-                  "$type": "Humidity",
-                  "SensorId": "2e3d4c5b-6a79-48e9-d0c1-f2e3d4c5b6a7",
-                  "SensorType": "Humidity",
-                  "Description": "Garage humidity"
-                },
-                {
-                  "$type": "Voltage",
-                  "SensorId": "3d4c5b6a-798e-49d0-c1f2-e3d4c5b6a798",
-                  "SensorType": "Voltage",
-                  "Description": "Garage battery voltage"
-                },
-                {
-                  "$type": "DeviceModel",
-                  "SensorId": "4c5b6a79-8e9d-40c1-f2e3-d4c5b6a798e9",
-                  "SensorType": "DeviceModel",
-                  "Description": "Garage device model"
-                },
-                {
-                  "$type": "Firmware",
-                  "SensorId": "5b6a798e-9d0c-41f2-e3d4-c5b6a798e9d0",
-                  "SensorType": "Firmware",
-                  "Description": "Garage firmware version"
-                },
-                {
-                  "$type": "RadioConfig",
-                  "SensorId": "6a798e9d-0c1f-42e3-d4c5-b6a798e9d0c1",
-                  "SensorType": "RadioConfig",
-                  "Description": "Garage LoRa config"
-                },
-                {
-                  "$type": "Gateway",
-                  "SensorId": "798e9d0c-1f2e-43d4-c5b6-a798e9d0c1f2",
-                  "SensorType": "Gateway",
-                  "Description": "Garage gateway info"
-                }
-              ],
-              "DeviceId": "a8404101da5f3677"
-            },
-            {
-              "$type": "LHT65N",
-              "Sensors": [
-                {
-                  "$type": "Temperature",
-                  "SensorId": "8e9d0c1f-2e3d-44c5-b6a7-98e9d0c1f2e3",
-                  "SensorType": "Temperature",
-                  "Description": "Outdoor temperature"
-                },
-                {
-                  "$type": "Humidity",
-                  "SensorId": "9d0c1f2e-3d4c-45b6-a798-e9d0c1f2e3d4",
-                  "SensorType": "Humidity",
-                  "Description": "Outdoor humidity"
-                },
-                {
-                  "$type": "Voltage",
-                  "SensorId": "0c1f2e3d-4c5b-46a7-98e9-d0c1f2e3d4c5",
-                  "SensorType": "Voltage",
-                  "Description": "Outdoor battery voltage"
-                },
-                {
-                  "$type": "Illumination",
-                  "SensorId": "1f2e3d4c-5b6a-4798-e9d0-c1f2e3d4c5b6",
-                  "SensorType": "Illumination",
-                  "Description": "Outdoor illumination"
-                },
-                {
-                  "$type": "DeviceModel",
-                  "SensorId": "2e3d4c5b-6a79-48e9-d0c1-f2e3d4c5b6a7",
-                  "SensorType": "DeviceModel",
-                  "Description": "Outdoor device model"
-                },
-                {
-                  "$type": "Firmware",
-                  "SensorId": "3d4c5b6a-798e-49d0-c1f2-e3d4c5b6a798",
-                  "SensorType": "Firmware",
-                  "Description": "Outdoor firmware version"
-                },
-                {
-                  "$type": "RadioConfig",
-                  "SensorId": "4c5b6a79-8e9d-40c1-f2e3-d4c5b6a798e9",
-                  "SensorType": "RadioConfig",
-                  "Description": "Outdoor LoRa config"
-                },
-                {
-                  "$type": "Gateway",
-                  "SensorId": "5b6a798e-9d0c-41f2-e3d4-c5b6a798e9d0",
-                  "SensorType": "Gateway",
-                  "Description": "Outdoor gateway info"
-                }
-              ],
-              "DeviceId": "a84041c10b5ff491"
-            },
-            {
-              "$type": "LDS02",
-              "Sensors": [
-                {
-                  "$type": "Door",
-                  "SensorId": "a1b2c3d4-e5f6-47a8-9b0c-1d2e3f4a5b6c",
-                  "SensorType": "Door",
-                  "Description": "Front door status"
-                },
-                {
-                  "$type": "Voltage",
-                  "SensorId": "b2c3d4e5-f6a7-48b9-0c1d-2e3f4a5b6c7d",
-                  "SensorType": "Voltage",
-                  "Description": "Front door battery voltage"
-                },
-                {
-                  "$type": "Gateway",
-                  "SensorId": "f6a7b8c9-d0e1-42f3-4a5b-6c7d8e9f0a1b",
-                  "SensorType": "Gateway",
-                  "Description": "Front door gateway info"
-                }
-              ],
-              "DeviceId": "a8404136995ea57b"
-            },
-            {
-              "$type": "LDS02",
-              "Sensors": [
-                {
-                  "$type": "Door",
-                  "SensorId": "1a2b3c4d-5e6f-47a8-9b0c-1d2e3f4a5b6c",
-                  "SensorType": "Door",
-                  "Description": "Patio door status"
-                },
-                {
-                  "$type": "Voltage",
-                  "SensorId": "2b3c4d5e-6f7a-48b9-0c1d-2e3f4a5b6c7d",
-                  "SensorType": "Voltage",
-                  "Description": "Patio door battery voltage"
-                },
-                {
-                  "$type": "Gateway",
-                  "SensorId": "6f7a8b9c-0d1e-42f3-4a5b-6c7d8e9f0a1b",
-                  "SensorType": "Gateway",
-                  "Description": "Patio door gateway info"
-                }
-              ],
-              "DeviceId": "a8404178215ea57c"
-            },
-            {
-              "$type": "LHT65NVIB",
-              "Sensors": [
-                {
-                  "$type": "Vibration",
-                  "SensorId": "7a8b9c0d-1e2f-43a4-5b6c-7d8e9f0a1b2c",
-                  "SensorType": "Vibration",
-                  "Description": "HVAC vibration monitoring"
-                },
-                {
-                  "$type": "Temperature",
-                  "SensorId": "8b9c0d1e-2f3a-44b5-6c7d-8e9f0a1b2c3d",
-                  "SensorType": "Temperature",
-                  "Description": "HVAC temperature"
-                },
-                {
-                  "$type": "Humidity",
-                  "SensorId": "9c0d1e2f-3a4b-45c6-7d8e-9f0a1b2c3d4e",
-                  "SensorType": "Humidity",
-                  "Description": "HVAC humidity"
-                },
-                {
-                  "$type": "Acceleration",
-                  "SensorId": "0d1e2f3a-4b5c-46d7-8e9f-0a1b2c3d4e5f",
-                  "SensorType": "Acceleration",
-                  "Description": "HVAC max acceleration"
-                },
-                {
-                  "$type": "Voltage",
-                  "SensorId": "1e2f3a4b-5c6d-47e8-9f0a-1b2c3d4e5f6a",
-                  "SensorType": "Voltage",
-                  "Description": "HVAC battery voltage"
-                },
-                {
-                  "$type": "DeviceModel",
-                  "SensorId": "2f3a4b5c-6d7e-48f9-0a1b-2c3d4e5f6a7b",
-                  "SensorType": "DeviceModel",
-                  "Description": "HVAC device model"
-                },
-                {
-                  "$type": "Firmware",
-                  "SensorId": "3a4b5c6d-7e8f-490a-1b2c-3d4e5f6a7b8c",
-                  "SensorType": "Firmware",
-                  "Description": "HVAC firmware version"
-                },
-                {
-                  "$type": "RadioConfig",
-                  "SensorId": "4b5c6d7e-8f9a-400b-2c3d-4e5f6a7b8c9d",
-                  "SensorType": "RadioConfig",
-                  "Description": "HVAC LoRa config"
-                },
-                {
-                  "$type": "Gateway",
-                  "SensorId": "5c6d7e8f-9a0b-411c-3d4e-5f6a7b8c9d0e",
-                  "SensorType": "Gateway",
-                  "Description": "HVAC gateway info"
-                }
-              ],
-              "DeviceId": "a8404134095f3c52"
-            }
-          ],
-          "GatewayIds": [
-            "2cf7f11173000049"
-          ]
+            ],
+            "ApplicationId": "f5e6d7c8-9a0b-4c1d-2e3f-4a5b6c7d8e9f"
         }
-      ],
-      "ApplicationId": "f5e6d7c8-9a0b-4c1d-2e3f-4a5b6c7d8e9f"
-    }
-  ]
+    ]
 }
