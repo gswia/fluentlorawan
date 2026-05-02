@@ -4,7 +4,7 @@ CREATE OR REPLACE FUNCTION v1.get_humidity_window_stats(
     p_window_end   timestamp with time zone)
 RETURNS TABLE(
     group_id            UUID,
-    device_id           UUID,
+    device_id           TEXT,
     sensor_id           UUID,
     actual_window_start text,
     actual_window_end   text,

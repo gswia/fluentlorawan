@@ -36,7 +36,8 @@ CREATE TABLE IF NOT EXISTS v1.groups (
     account_id          UUID NOT NULL,
     name                TEXT NOT NULL,
     group_type          TEXT NOT NULL,
-    timezone            TEXT NOT NULL
+    timezone            TEXT NOT NULL,
+    gateway_ids         TEXT[]  -- LoRaWAN gateway EUIs
 );
 
 -- CRITICAL index for window function filtering (mirrors OLD sites table pattern)
@@ -44,16 +45,16 @@ CREATE INDEX IF NOT EXISTS idx_groups_timezone ON v1.groups (timezone);
 
 -- devices table
 CREATE TABLE IF NOT EXISTS v1.devices (
-    device_id           UUID PRIMARY KEY,
+    device_id           TEXT PRIMARY KEY,  -- DevEUI (LoRaWAN device identifier)
     device_profile      JSONB
 );
 
 -- sensors table
 CREATE TABLE IF NOT EXISTS v1.sensors (
     sensor_id           UUID PRIMARY KEY,
-    device_id           UUID NOT NULL,
+    device_id           TEXT NOT NULL,  -- DevEUI reference
     sensor_type         TEXT NOT NULL,
-    description         TEXT
+    sensor_profile      JSONB
 );
 
 -- Index on device_id (auto-created from FK, needed for device_groups joins)
@@ -62,7 +63,7 @@ CREATE INDEX IF NOT EXISTS idx_sensors_device_id ON v1.sensors (device_id);
 -- device_groups junction table (replaces OLD sensor_site_map)
 -- Supports many-to-many: devices can belong to multiple groups
 CREATE TABLE IF NOT EXISTS v1.device_groups (
-    device_id           UUID NOT NULL,
+    device_id           TEXT NOT NULL,  -- DevEUI reference
     group_id            UUID NOT NULL,
     PRIMARY KEY (device_id, group_id)
 );
