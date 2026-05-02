@@ -31,9 +31,6 @@ CREATE TABLE IF NOT EXISTS v1.sensor_readings (
 -- Convert to hypertable
 SELECT create_hypertable('v1.sensor_readings', 'timestamp_utc', if_not_exists => TRUE);
 
--- CRITICAL index for continuous aggregate WHERE filters
-CREATE INDEX IF NOT EXISTS idx_sensor_readings_type ON v1.sensor_readings (type);
-
 
 -- gateway_readings hypertable
 CREATE TABLE IF NOT EXISTS v1.gateway_readings (
@@ -49,9 +46,6 @@ CREATE TABLE IF NOT EXISTS v1.gateway_readings (
 
 -- Convert to hypertable
 SELECT create_hypertable('v1.gateway_readings', 'timestamp_utc', if_not_exists => TRUE);
-
--- CRITICAL index for continuous aggregate WHERE filters (if using type-based caggs)
-CREATE INDEX IF NOT EXISTS idx_gateway_readings_type ON v1.gateway_readings (type);
 
 -- =====================================================================
 -- PHASE 3: CREATE GROUP MODEL TABLES
