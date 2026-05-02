@@ -28,6 +28,10 @@ namespace IotHubFunction
             ServiceBusReceivedMessage message)
         {
             var stopwatch = Stopwatch.StartNew();
+            
+            // DEPLOYMENT TRACE: Confirm v1 schema support is active
+            _logger.LogInformation("ServiceBusListener v1.1 (2026-05-01) - V1 SCHEMA ENABLED - Processing message {MessageId}", message.MessageId);
+            
             _telemetryClient.TrackEvent("MessageReceiveStarted", new Dictionary<string, string>
             {
                 { "MessageId", message.MessageId },
@@ -233,7 +237,7 @@ namespace IotHubFunction
                         insertCmd.Parameters.AddWithValue(v1GroupId.Value);
                         insertCmd.Parameters.AddWithValue(sensorReading.DeviceId);
                         insertCmd.Parameters.AddWithValue(v1SensorId);
-                        insertCmd.Parameters.AddWithValue(sensorReading.MessageId);
+                        insertCmd.Parameters.AddWithValue(Guid.Parse(sensorReading.MessageId));
                         insertCmd.Parameters.AddWithValue(sensorReading.Type);
                         insertCmd.Parameters.AddWithValue(NpgsqlDbType.Jsonb, payloadJson);
                         
@@ -253,7 +257,7 @@ namespace IotHubFunction
                         insertCmd.Parameters.AddWithValue(v1GroupId.Value);
                         insertCmd.Parameters.AddWithValue(gatewayReading.DeviceId);
                         insertCmd.Parameters.AddWithValue(gatewayReading.GatewayId);
-                        insertCmd.Parameters.AddWithValue(gatewayReading.MessageId);
+                        insertCmd.Parameters.AddWithValue(Guid.Parse(gatewayReading.MessageId));
                         insertCmd.Parameters.AddWithValue(gatewayReading.Type);
                         insertCmd.Parameters.AddWithValue(NpgsqlDbType.Jsonb, payloadJson);
                         
