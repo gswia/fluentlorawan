@@ -9,7 +9,7 @@
 
 ## Phase 1: Create NEW Schema Definitions
 
-- [ ] 1. Create `NEW/sql/schema/00_tables_readings.sql`: Define `sensor_readings` and `gateway_readings` hypertables with **group_id** (replacing application_id/site_id). 
+- [x] 1. Create `NEW/sql/schema/00_tables_readings.sql`: Define `sensor_readings` and `gateway_readings` hypertables with **group_id** (replacing application_id/site_id).
   - **sensor_readings columns:** timestamp_utc, account_id, group_id, device_id, sensor_id, message_id, type, payload (JSONB)
   - **Primary Key:** (timestamp_utc, sensor_id) - hypertable partitioning
   - **Indexes (mirroring OLD pattern exactly):**
@@ -21,7 +21,7 @@
   - **gateway_readings:** Similar structure and index pattern
   - **Note:** All 5 indexes from OLD are preserved with same pattern, only replacing implicit site_id references with group_id
 
-- [ ] 2. Create `NEW/sql/schema/01_tables_group_model.sql`: Define Group model tables with indexes matching OLD query patterns.
+- [x] 2. Create `NEW/sql/schema/01_tables_group_model.sql`: Define Group model tables with indexes matching OLD query patterns.
   - **accounts:** account_id PK, name, storage_config JSONB
   - **users:** user_id PK, email, name
   - **roles:** role_id PK, name, permissions text[]
@@ -38,11 +38,11 @@
 
 ## Phase 2: Create NEW Functions (Modified from OLD)
 
-- [ ] 3. Create `NEW/sql/functions/01-05_cagg_*.sql`: Copy 5 continuous aggregate definitions from `OLD/sql/functions/` (no modifications needed - they only reference sensor_readings.type and sensor_id which remain unchanged).
+- [x] 3. Create `NEW/sql/functions/01-05_cagg_*.sql`: Copy 5 continuous aggregate definitions from `OLD/sql/functions/` (no modifications needed - they only reference sensor_readings.type and sensor_id which remain unchanged).
 
-- [ ] 4. Create `NEW/sql/functions/05-08,12_fn_get_*_window_stats.sql`: Modify window stats functions from `OLD/sql/functions/`:
+- [x] 4. Create `NEW/sql/functions/06-10_fn_get_*_window_stats.sql`: Modify window stats functions from `OLD/sql/functions/`:
   - **OLD join pattern:** `cagg JOIN sensor_site_map sm ON sm.sensor_id = cagg.sensor_id WHERE sm.site_id IN (SELECT site_id FROM sites WHERE timezone = p_timezone)`
-  - **NEW join pattern (option A - filter groups first, more efficient):**
+  - **NEW join pattern (filter groups first, more efficient):**
     ```sql
     WITH groups_in_tz AS (
         SELECT group_id FROM groups WHERE timezone = p_timezone
@@ -57,12 +57,12 @@
   - **Return columns:** Replace site_id with group_id in function signature
   - **Continuous aggregates remain:** GROUP BY (hour, sensor_id) with NO group_id - devices can move between groups, want stable historical data
 
-- [ ] 5. Create `NEW/sql/functions/09_fn_get_timezone_analysis_stats.sql`: Modify from `OLD/sql/functions/`:
+- [x] 5. Create `NEW/sql/functions/11_fn_get_timezone_analysis_stats.sql`: Modify from `OLD/sql/functions/`:
   - **Add parameters:** p_current_window_hours INTEGER, p_previous_window_hours INTEGER (default both to 24)
   - **Replace:** Hardcoded `INTERVAL '24 hours'` with `INTERVAL '1 hour' * p_current_window_hours`
-  - **Optional:** Add sensor descriptions by joining `sensors` table in final output (or leave for API layer)
+  - **Changed keys:** current_24h/previous_24h → current_window/previous_window for clarity
 
-- [ ] 6. Skip `get_timezone_analysis_stats_enriched` - handle enrichment in base function or API layer.
+- [x] 6. Skip `get_timezone_analysis_stats_enriched` - handle enrichment in base function or API layer.
 
 ## Phase 3: Create Migration
 
