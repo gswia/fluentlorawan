@@ -173,20 +173,11 @@ namespace IotHubFunction
             // Insert readings into v1 schema (side-by-side, failures won't break existing flow)
             try
             {
-                // Query v1 schema for device configuration
+                // Query v1 schema for device configuration using function
                 await using var v1QueryCmd = new NpgsqlCommand(
-                    @"SELECT 
-                        dg.group_id,
-                        g.account_id,
-                        s.sensor_id,
-                        s.sensor_type
-                      FROM v1.devices d
-                      JOIN v1.device_groups dg ON dg.device_id = d.device_id
-                      JOIN v1.groups g ON g.group_id = dg.group_id
-                      LEFT JOIN v1.sensors s ON s.device_id = d.device_id
-                      WHERE d.device_id = @device_id",
+                    "SELECT * FROM v1.get_device_config($1)",
                     conn);
-                v1QueryCmd.Parameters.AddWithValue("device_id", deviceId);
+                v1QueryCmd.Parameters.AddWithValue(deviceId);
 
                 var v1Mappings = new Dictionary<string, Guid>(); // sensor_type -> sensor_id
                 Guid? v1GroupId = null;
@@ -210,60 +201,54 @@ namespace IotHubFunction
 
                 if (v1GroupId != null && v1AccountId != null)
                 {
-                    // Insert readings to v1 schema
+                    // Insert readings to v1 schema using functions
                     foreach (var reading in readings)
-                {
-                    var payloadJson = JsonSerializer.Serialize(reading.GetPayload());
-                    
-                    if (reading is Readings.SensorReading sensorReading)
                     {
-                        // Map sensor type to v1 sensor_id
-                        if (!v1Mappings.TryGetValue(sensorReading.Type, out var v1SensorId))
+                        var payloadJson = JsonSerializer.Serialize(reading.GetPayload());
+                        
+                        if (reading is Readings.SensorReading sensorReading)
                         {
-                            _logger.LogInformation("V1: Sensor type {SensorType} not found in v1.sensors for device {DeviceId}, skipping reading", 
-                                sensorReading.Type, deviceId);
-                            continue;
-                        }
+                            // Map sensor type to v1 sensor_id
+                            if (!v1Mappings.TryGetValue(sensorReading.Type, out var v1SensorId))
+                            {
+                                _logger.LogInformation("V1: Sensor type {SensorType} not found in v1.sensors for device {DeviceId}, skipping reading", 
+                                    sensorReading.Type, deviceId);
+                                continue;
+                            }
 
-                        await using var insertCmd = new NpgsqlCommand(
-                            @"INSERT INTO v1.sensor_readings (
-                                timestamp_utc, account_id, group_id, 
-                                device_id, sensor_id, message_id, type, payload
-                            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-                            conn);
-                        
-                        insertCmd.Parameters.AddWithValue(sensorReading.TimestampUTC);
-                        insertCmd.Parameters.AddWithValue(v1AccountId.Value);
-                        insertCmd.Parameters.AddWithValue(v1GroupId.Value);
-                        insertCmd.Parameters.AddWithValue(sensorReading.DeviceId);
-                        insertCmd.Parameters.AddWithValue(v1SensorId);
-                        insertCmd.Parameters.AddWithValue(Guid.Parse(sensorReading.MessageId));
-                        insertCmd.Parameters.AddWithValue(sensorReading.Type);
-                        insertCmd.Parameters.AddWithValue(NpgsqlDbType.Jsonb, payloadJson);
-                        
-                        await insertCmd.ExecuteNonQueryAsync();
+                            await using var insertCmd = new NpgsqlCommand(
+                                "SELECT v1.insert_sensor_reading($1, $2, $3, $4, $5, $6, $7, $8)",
+                                conn);
+                            
+                            insertCmd.Parameters.AddWithValue(sensorReading.TimestampUTC);
+                            insertCmd.Parameters.AddWithValue(v1AccountId.Value);
+                            insertCmd.Parameters.AddWithValue(v1GroupId.Value);
+                            insertCmd.Parameters.AddWithValue(sensorReading.DeviceId);
+                            insertCmd.Parameters.AddWithValue(v1SensorId);
+                            insertCmd.Parameters.AddWithValue(Guid.Parse(sensorReading.MessageId));
+                            insertCmd.Parameters.AddWithValue(sensorReading.Type);
+                            insertCmd.Parameters.AddWithValue(NpgsqlDbType.Jsonb, payloadJson);
+                            
+                            await insertCmd.ExecuteNonQueryAsync();
+                        }
+                        else if (reading is Readings.GatewayReading gatewayReading)
+                        {
+                            await using var insertCmd = new NpgsqlCommand(
+                                "SELECT v1.insert_gateway_reading($1, $2, $3, $4, $5, $6, $7, $8)",
+                                conn);
+                            
+                            insertCmd.Parameters.AddWithValue(gatewayReading.TimestampUTC);
+                            insertCmd.Parameters.AddWithValue(v1AccountId.Value);
+                            insertCmd.Parameters.AddWithValue(v1GroupId.Value);
+                            insertCmd.Parameters.AddWithValue(gatewayReading.DeviceId);
+                            insertCmd.Parameters.AddWithValue(gatewayReading.GatewayId);
+                            insertCmd.Parameters.AddWithValue(Guid.Parse(gatewayReading.MessageId));
+                            insertCmd.Parameters.AddWithValue(gatewayReading.Type);
+                            insertCmd.Parameters.AddWithValue(NpgsqlDbType.Jsonb, payloadJson);
+                            
+                            await insertCmd.ExecuteNonQueryAsync();
+                        }
                     }
-                    else if (reading is Readings.GatewayReading gatewayReading)
-                    {
-                        await using var insertCmd = new NpgsqlCommand(
-                            @"INSERT INTO v1.gateway_readings (
-                                timestamp_utc, account_id, group_id, 
-                                device_id, gateway_id, message_id, type, payload
-                            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-                            conn);
-                        
-                        insertCmd.Parameters.AddWithValue(gatewayReading.TimestampUTC);
-                        insertCmd.Parameters.AddWithValue(v1AccountId.Value);
-                        insertCmd.Parameters.AddWithValue(v1GroupId.Value);
-                        insertCmd.Parameters.AddWithValue(gatewayReading.DeviceId);
-                        insertCmd.Parameters.AddWithValue(gatewayReading.GatewayId);
-                        insertCmd.Parameters.AddWithValue(Guid.Parse(gatewayReading.MessageId));
-                        insertCmd.Parameters.AddWithValue(gatewayReading.Type);
-                        insertCmd.Parameters.AddWithValue(NpgsqlDbType.Jsonb, payloadJson);
-                        
-                        await insertCmd.ExecuteNonQueryAsync();
-                    }
-                }
 
                     _telemetryClient.TrackEvent("V1SchemaInsertSuccess", new Dictionary<string, string>
                     {
