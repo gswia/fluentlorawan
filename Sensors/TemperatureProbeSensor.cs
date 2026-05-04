@@ -13,8 +13,7 @@ namespace IotHubFunction.Sensors
         public override List<Reading> CreateReadings(
             ChirpStackMessage message, 
             string accountId,
-            string applicationId,
-            string siteId,
+            string groupId,
             string deviceId, 
             string messageId,
             Device device)

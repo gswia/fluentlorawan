@@ -110,8 +110,7 @@ namespace IotHubFunction
             var readings = device.CreateReadings(
                 chirpStackMessage, 
                 v1AccountId.Value.ToString(), 
-                "temp_app_id",  // Legacy parameter, ignored by v1
-                "temp_site_id"  // Legacy parameter, ignored by v1
+                v1GroupId.Value.ToString()
             );
             
             // Insert readings to v1 schema using functions

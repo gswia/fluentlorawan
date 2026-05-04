@@ -4,8 +4,7 @@ namespace IotHubFunction.Readings
     {
         public DateTime TimestampUTC { get; set; }
         public string AccountId { get; set; } = string.Empty;
-        public string ApplicationId { get; set; } = string.Empty;
-        public string SiteId { get; set; } = string.Empty;
+        public string GroupId { get; set; } = string.Empty;
         public string DeviceId { get; set; } = string.Empty;
         public string MessageId { get; set; } = string.Empty;
         public string Type { get; set; } = string.Empty;

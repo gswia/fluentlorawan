@@ -12,7 +12,7 @@ namespace IotHubFunction.Configuration
         public string DeviceId { get; set; } = string.Empty;
         public List<Sensor> Sensors { get; set; } = new();
         
-        public virtual List<Reading> CreateReadings(ChirpStackMessage message, string accountId, string applicationId, string siteId)
+        public virtual List<Reading> CreateReadings(ChirpStackMessage message, string accountId, string groupId)
         {
             var readings = new List<Reading>();
             var deviceId = message.DeviceInfo.DevEui;
@@ -20,7 +20,7 @@ namespace IotHubFunction.Configuration
 
             foreach (var sensor in Sensors)
             {
-                var sensorReadings = sensor.CreateReadings(message, accountId, applicationId, siteId, deviceId, messageId, this);
+                var sensorReadings = sensor.CreateReadings(message, accountId, groupId, deviceId, messageId, this);
                 readings.AddRange(sensorReadings);
             }
 
