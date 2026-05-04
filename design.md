@@ -1,4 +1,0 @@
-# GPS Tracker — Design
-
-## Storage
-

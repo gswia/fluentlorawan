@@ -2,37 +2,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug EelinkDecoder",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build-decoder",
-            "program": "${workspaceFolder}/packages/EelinkDecoder/bin/Debug/net8.0/EelinkDecoder.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/packages/EelinkDecoder",
-            "console": "integratedTerminal",
-            "stopAtEntry": false
-        },
-        {
-            "name": "Debug MessageFlowTest",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build (message-flow-test)",
-            "program": "${workspaceFolder}/MessageFlowTest/bin/Debug/net8.0/MessageFlowTest.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}",
-            "console": "integratedTerminal",
-            "stopAtEntry": false,
-            "justMyCode": false,
-            "enableStepFiltering": false,
-            "logging": {
-                "moduleLoad": false
-            },
-            "symbolOptions": {
-                "searchPaths": [],
-                "searchMicrosoftSymbolServer": false
-            }
-        },
-        {
             "name": "Attach to .NET Functions",
             "type": "coreclr",
             "request": "attach",

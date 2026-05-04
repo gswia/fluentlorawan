@@ -9,21 +9,9 @@
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="MessageFlowTest\**\*.cs" />
-    <EmbeddedResource Remove="MessageFlowTest\**\*" />
-    <None Remove="MessageFlowTest\**\*" />
-    <Compile Remove="TrackerWorker\**\*.cs" />
-    <EmbeddedResource Remove="TrackerWorker\**\*" />
-    <None Remove="TrackerWorker\**\*" />
-    <Compile Remove="EelinkTcpWorker\**\*.cs" />
-    <EmbeddedResource Remove="EelinkTcpWorker\**\*" />
-    <None Remove="EelinkTcpWorker\**\*" />
     <Compile Remove="NEW\**\*.cs" />
     <EmbeddedResource Remove="NEW\**\*" />
     <None Remove="NEW\**\*" />
-    <Compile Remove="packages\**\*.cs" />
-    <EmbeddedResource Remove="packages\**\*" />
-    <None Remove="packages\**\*" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Data.Tables" Version="12.11.0" />

@@ -27,34 +27,6 @@
 			"problemMatcher": "$msCompile"
 		},
 		{
-			"label": "build (message-flow-test)",
-			"command": "dotnet",
-			"args": [
-				"build",
-				"${workspaceFolder}/MessageFlowTest/MessageFlowTest.csproj",
-				"/property:GenerateFullPaths=true",
-				"/consoleloggerparameters:NoSummary"
-			],
-			"type": "process",
-			"problemMatcher": "$msCompile"
-		},
-		{
-			"label": "build-decoder",
-			"command": "dotnet",
-			"args": [
-				"build",
-				"${workspaceFolder}/packages/EelinkDecoder/EelinkDecoder.csproj",
-				"/property:GenerateFullPaths=true",
-				"/consoleloggerparameters:NoSummary"
-			],
-			"type": "process",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"problemMatcher": "$msCompile"
-		},
-		{
 			"label": "clean release (functions)",
 			"command": "dotnet",
 			"args": [
