@@ -14,6 +14,11 @@
     <None Remove="NEW\**\*" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Devices\**\*.cs" LinkBase="Devices" />
+    <Compile Include="..\Sensors\**\*.cs" LinkBase="Sensors" />
+    <Compile Include="..\Readings\**\*.cs" LinkBase="Readings" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Azure.Data.Tables" Version="12.11.0" />
     <PackageReference Include="Azure.Identity" Version="1.17.1" />
     <PackageReference Include="Microsoft.Azure.Kusto.Ingest" Version="14.0.3" />

@@ -1,4 +1,4 @@
-namespace NoReturn.LoRaWAN.Models;
+namespace IotHubFunction.DataAccess.Models;
 
 /// <summary>
 /// Device configuration returned from v1.get_device_config function

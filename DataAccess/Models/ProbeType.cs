@@ -1,6 +1,6 @@
-namespace NoReturn.LoRaWAN.Models
+namespace IotHubFunction.DataAccess.Models
 {
-    public class ModelNumber : SensorReading
+    public class ProbeType : SensorReading
     {
         public int Value { get; set; }
 

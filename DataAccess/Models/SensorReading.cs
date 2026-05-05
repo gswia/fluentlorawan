@@ -1,4 +1,4 @@
-namespace NoReturn.LoRaWAN.Models
+namespace IotHubFunction.DataAccess.Models
 {
     public abstract class SensorReading : Reading
     {

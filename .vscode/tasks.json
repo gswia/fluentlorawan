@@ -6,7 +6,7 @@
 			"command": "dotnet",
 			"args": [
 				"clean",
-				"${workspaceFolder}/IotHubFunction.csproj",
+				"${workspaceFolder}/Functions/IotHubFunction.csproj",
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
@@ -18,7 +18,7 @@
 			"command": "dotnet",
 			"args": [
 				"build",
-				"${workspaceFolder}/IotHubFunction.csproj",
+				"${workspaceFolder}/Functions/IotHubFunction.csproj",
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
@@ -31,7 +31,7 @@
 			"command": "dotnet",
 			"args": [
 				"clean",
-				"${workspaceFolder}/IotHubFunction.csproj",
+				"${workspaceFolder}/Functions/IotHubFunction.csproj",
 				"--configuration",
 				"Release",
 				"/property:GenerateFullPaths=true",
@@ -45,7 +45,7 @@
 			"command": "dotnet",
 			"args": [
 				"publish",
-				"${workspaceFolder}/IotHubFunction.csproj",
+				"${workspaceFolder}/Functions/IotHubFunction.csproj",
 				"--configuration",
 				"Release",
 				"/property:GenerateFullPaths=true",
@@ -59,7 +59,7 @@
 			"type": "func",
 			"dependsOn": "build (functions)",
 			"options": {
-				"cwd": "${workspaceFolder}/bin/Debug/net8.0"
+				"cwd": "${workspaceFolder}/Functions/bin/Debug/net8.0"
 			},
 			"command": "host start",
 			"isBackground": true,
