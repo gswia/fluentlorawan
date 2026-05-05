@@ -1,7 +1,8 @@
 using IotHubFunction.Readings;
+using IotHubFunction.Sensors;
 using System.Text.Json.Serialization;
 
-namespace IotHubFunction.Configuration
+namespace IotHubFunction.Devices
 {
     [JsonDerivedType(typeof(LHT52Device), typeDiscriminator: "LHT52")]
     [JsonDerivedType(typeof(LHT65NDevice), typeDiscriminator: "LHT65N")]

@@ -1,4 +1,4 @@
-using IotHubFunction.Configuration;
+using IotHubFunction.Devices;
 using IotHubFunction.Readings;
 
 namespace IotHubFunction.Sensors

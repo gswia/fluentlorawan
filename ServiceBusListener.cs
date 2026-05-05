@@ -7,7 +7,8 @@ using System.Text.Json;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using System.Diagnostics;
-using IotHubFunction.Configuration;
+using IotHubFunction.Devices;
+using IotHubFunction.Sensors;
 
 namespace IotHubFunction
 {

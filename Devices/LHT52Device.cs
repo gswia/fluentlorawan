@@ -1,4 +1,4 @@
-namespace IotHubFunction.Configuration
+namespace IotHubFunction.Devices
 {
     public class LHT52Device : Device
     {
