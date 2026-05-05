@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace IotHubFunction
+namespace NoReturn.LoRaWAN
 {
     /// <summary>
     /// Minimal ChirpStack message model - only fields we actually use

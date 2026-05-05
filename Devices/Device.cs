@@ -1,8 +1,8 @@
-using IotHubFunction.Readings;
-using IotHubFunction.Sensors;
+using NoReturn.LoRaWAN.Readings;
+using NoReturn.LoRaWAN.Sensors;
 using System.Text.Json.Serialization;
 
-namespace IotHubFunction.Devices
+namespace NoReturn.LoRaWAN.Devices
 {
     [JsonDerivedType(typeof(LHT52Device), typeDiscriminator: "LHT52")]
     [JsonDerivedType(typeof(LHT65NDevice), typeDiscriminator: "LHT65N")]

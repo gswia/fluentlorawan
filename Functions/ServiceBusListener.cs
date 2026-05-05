@@ -7,10 +7,10 @@ using System.Text.Json;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using System.Diagnostics;
-using IotHubFunction.Devices;
-using IotHubFunction.Sensors;
+using NoReturn.LoRaWAN.Devices;
+using NoReturn.LoRaWAN.Sensors;
 
-namespace IotHubFunction
+namespace NoReturn.LoRaWAN
 {
     public class ServiceBusListener
     {

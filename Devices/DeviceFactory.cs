@@ -1,4 +1,4 @@
-namespace IotHubFunction.Devices
+namespace NoReturn.LoRaWAN.Devices
 {
     public static class DeviceFactory
     {

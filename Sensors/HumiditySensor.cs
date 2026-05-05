@@ -1,8 +1,8 @@
-using IotHubFunction.Devices;
-using IotHubFunction.Readings;
+using NoReturn.LoRaWAN.Devices;
+using NoReturn.LoRaWAN.Readings;
 using System.Text.Json;
 
-namespace IotHubFunction.Sensors
+namespace NoReturn.LoRaWAN.Sensors
 {
     public class HumiditySensor : Sensor
     {

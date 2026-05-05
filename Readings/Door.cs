@@ -1,4 +1,4 @@
-namespace IotHubFunction.Readings
+namespace NoReturn.LoRaWAN.Readings
 {
     public class Door : SensorReading
     {

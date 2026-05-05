@@ -4,7 +4,7 @@ VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IotHubFunction", "Functions\IotHubFunction.csproj", "{56C6817F-5770-07DF-E64E-9D543DE7CD61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IotHubFunction.DataAccess", "DataAccess\IotHubFunction.DataAccess.csproj", "{A8B9C1D2-3E4F-5678-9ABC-DEF012345678}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IotHubFunction.Postgres", "Postgres\IotHubFunction.Postgres.csproj", "{A8B9C1D2-3E4F-5678-9ABC-DEF012345678}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

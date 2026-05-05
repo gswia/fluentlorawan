@@ -1,7 +1,7 @@
-using IotHubFunction.Readings;
+using NoReturn.LoRaWAN.Readings;
 using System.Text.Json.Serialization;
 
-namespace IotHubFunction.Sensors
+namespace NoReturn.LoRaWAN.Sensors
 {
     [JsonDerivedType(typeof(TemperatureSensor), typeDiscriminator: "Temperature")]
     [JsonDerivedType(typeof(HumiditySensor), typeDiscriminator: "Humidity")]
@@ -27,6 +27,6 @@ namespace IotHubFunction.Sensors
             string groupId,
             string deviceId, 
             string messageId,
-            IotHubFunction.Devices.Device device);
+            NoReturn.LoRaWAN.Devices.Device device);
     }
 }

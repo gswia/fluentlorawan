@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace IotHubFunction.Sensors
+namespace NoReturn.LoRaWAN.Sensors
 {
     public static class SensorFactory
     {

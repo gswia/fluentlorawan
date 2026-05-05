@@ -1,7 +1,7 @@
-using IotHubFunction.Devices;
-using IotHubFunction.Readings;
+using NoReturn.LoRaWAN.Devices;
+using NoReturn.LoRaWAN.Readings;
 
-namespace IotHubFunction.Sensors
+namespace NoReturn.LoRaWAN.Sensors
 {
     public class GatewaySensor : Sensor
     {

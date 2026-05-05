@@ -1,10 +1,10 @@
 using Microsoft.Extensions.Logging;
-using IotHubFunction.DataAccess.Models;
+using NoReturn.LoRaWAN.Readings;
 using Npgsql;
 using NpgsqlTypes;
 using System.Text.Json;
 
-namespace IotHubFunction.DataAccess;
+namespace NoReturn.LoRaWAN.Postgres;
 
 /// <summary>
 /// SQL provider for LoRaWAN device data using PostgreSQL v1 schema functions
