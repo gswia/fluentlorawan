@@ -22,6 +22,9 @@ CREATE INDEX IF NOT EXISTS sensor_readings_timestamp_utc_idx
 CREATE INDEX IF NOT EXISTS idx_sensor_readings_type 
     ON v1.sensor_readings (type);
     
+CREATE INDEX IF NOT EXISTS idx_sensor_readings_type_sensor_time 
+    ON v1.sensor_readings (type, sensor_id, timestamp_utc DESC);
+    
 CREATE INDEX IF NOT EXISTS idx_sensor_readings_sensor_time 
     ON v1.sensor_readings (sensor_id, timestamp_utc DESC);
     

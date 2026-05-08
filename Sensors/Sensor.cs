@@ -19,7 +19,7 @@ namespace NoReturn.LoRaWAN.Sensors
     {
         public Guid SensorId { get; set; }
         public string SensorType { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
+        public string Measures { get; set; } = string.Empty;
 
         public abstract List<Reading> CreateReadings(
             ChirpStackMessage message, 
@@ -28,5 +28,7 @@ namespace NoReturn.LoRaWAN.Sensors
             string deviceId, 
             string messageId,
             NoReturn.LoRaWAN.Devices.Device device);
+
+        public virtual object GetProfile() => new { Measures };
     }
 }

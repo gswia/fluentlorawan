@@ -27,5 +27,7 @@ namespace NoReturn.LoRaWAN.Devices
 
             return readings;
         }
+
+        public virtual object GetProfile() => new { };
     }
 }
