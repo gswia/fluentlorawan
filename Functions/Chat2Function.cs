@@ -65,19 +65,29 @@ Valid intents (use EXACTLY these names):
 - BATTERY_STATUS
 - HOUSE_OVERVIEW
 
-Return a JSON array of objects with 'intent' and 'subjects' (array of location strings).
-If no specific location is mentioned, use an empty array for subjects.
-If asking about the whole house, use HOUSE_OVERVIEW intent with empty subjects array.
+Return a JSON array of objects with:
+- 'intent': the intent name
+- 'subjectNames': array of specific location names (""bedroom 4"", ""master bedroom"")
+- 'subjectTypes': array of category types (""bedrooms"", ""rooms"", ""equipment"")
+
+IMPORTANT: Expand common shortcuts to full names:
+- ""master"" → ""master bedroom""
+- ""primary"" → ""primary bedroom""
+- ""bed 4"" → ""bedroom 4""
+- ""br 4"" → ""bedroom 4""
 
 Examples:
 User: ""How warm is bedroom 4?""
-Output: [{""intent"": ""TEMPERATURE_CURRENT"", ""subjects"": [""bedroom 4""]}]
+Output: [{""intent"": ""TEMPERATURE_CURRENT"", ""subjectNames"": [""bedroom 4""], ""subjectTypes"": []}]
 
-User: ""Are any doors open?""
-Output: [{""intent"": ""DOOR_STATUS"", ""subjects"": []}]
+User: ""How warm are the bedrooms?""
+Output: [{""intent"": ""TEMPERATURE_CURRENT"", ""subjectNames"": [], ""subjectTypes"": [""bedrooms""]}]
 
-User: ""Temperature in living room and bedroom 2?""
-Output: [{""intent"": ""TEMPERATURE_CURRENT"", ""subjects"": [""living room"", ""bedroom 2""]}]
+User: ""Temperature in master?""
+Output: [{""intent"": ""TEMPERATURE_CURRENT"", ""subjectNames"": [""master bedroom""], ""subjectTypes"": []}]
+
+User: ""Temperature in master bedroom and bedroom 4?""
+Output: [{""intent"": ""TEMPERATURE_CURRENT"", ""subjectNames"": [""master bedroom"", ""bedroom 4""], ""subjectTypes"": []}]
 
 Now extract from this user message:";
 
@@ -110,31 +120,71 @@ Now extract from this user message:";
             _logger.LogInformation("Graph loaded: {SubjectCount} subjects, {SensorCount} sensors", 
                 graph.Subjects.Count, graph.Sensors.Count);
 
+            // Pre-compute embeddings for graph subjects
+            var embeddingClient = _openAiClient.GetEmbeddingClient("text-embedding-3-large");
+            var subjectNames = graph.Subjects.Values.Select(s => s.Name).ToList();
+            var subjectEmbeddings = await embeddingClient.GenerateEmbeddingsAsync(subjectNames);
+            var subjectEmbeddingMap = new Dictionary<string, float[]>();
+            for (int i = 0; i < subjectNames.Count; i++)
+            {
+                subjectEmbeddingMap[subjectNames[i]] = subjectEmbeddings.Value[i].ToFloats().ToArray();
+            }
+
+            // Pre-compute type embeddings
+            var typeStrings = new List<string> { "bedroom sleeping room", "room", "bathroom", "equipment" };
+            var typeEmbeddings = await embeddingClient.GenerateEmbeddingsAsync(typeStrings);
+            var typeEmbeddingMap = new Dictionary<string, float[]>
+            {
+                ["room.bedroom"] = typeEmbeddings.Value[0].ToFloats().ToArray(),
+                ["room"] = typeEmbeddings.Value[1].ToFloats().ToArray(),
+                ["room.bathroom"] = typeEmbeddings.Value[2].ToFloats().ToArray(),
+                ["equipment"] = typeEmbeddings.Value[3].ToFloats().ToArray()
+            };
+
             // Process each intent
             var results = new List<string>();
+
             foreach (var intentPair in intentSubjects)
             {
-                _logger.LogInformation("Processing intent: {Intent} with {SubjectCount} subjects", 
-                    intentPair.Intent, intentPair.Subjects.Count);
+                _logger.LogInformation("Processing intent: {Intent} with {NameCount} names, {TypeCount} types", 
+                    intentPair.Intent, intentPair.SubjectNames.Count, intentPair.SubjectTypes.Count);
 
-                // Step 2: Match subjects to graph (simple string matching for now, embeddings later)
+                // Step 2: Match subjects using embeddings
                 var matchedSubjects = new List<Subject>();
-                foreach (var subjectName in intentPair.Subjects)
+
+                // Match by type (structural filter)
+                foreach (var typeQuery in intentPair.SubjectTypes)
                 {
-                    // Simple case-insensitive name matching
-                    var match = graph.Subjects.Values
-                        .FirstOrDefault(s => s.Name.Equals(subjectName, StringComparison.OrdinalIgnoreCase));
-                    
-                    if (match != null)
-                    {
-                        matchedSubjects.Add(match);
-                        _logger.LogInformation("Matched subject '{SubjectName}' to {SubjectId}", 
-                            subjectName, match.Id);
-                    }
-                    else
-                    {
-                        _logger.LogWarning("Could not match subject: {SubjectName}", subjectName);
-                    }
+                    var typeEmbedding = await embeddingClient.GenerateEmbeddingAsync(typeQuery);
+                    var typeVector = typeEmbedding.Value.ToFloats().ToArray();
+
+                    // Find matching type via embedding similarity
+                    var typeMatches = graph.Subjects.Values
+                        .Where(s => typeEmbeddingMap.ContainsKey(s.Type))
+                        .Select(s => (Subject: s, Similarity: CosineSimilarity(typeVector, typeEmbeddingMap[s.Type])))
+                        .Where(x => x.Similarity > 0.7f)
+                        .Select(x => x.Subject);
+
+                    matchedSubjects.AddRange(typeMatches);
+                    _logger.LogInformation("Matched type '{Type}' to {Count} subjects", typeQuery, typeMatches.Count());
+                }
+
+                // Match by name (semantic search)
+                foreach (var subjectName in intentPair.SubjectNames)
+                {
+                    var nameEmbedding = await embeddingClient.GenerateEmbeddingAsync(subjectName);
+                    var nameVector = nameEmbedding.Value.ToFloats().ToArray();
+
+                    var nameMatches = graph.Subjects.Values
+                        .Where(s => subjectEmbeddingMap.ContainsKey(s.Name))
+                        .Select(s => (Subject: s, Similarity: CosineSimilarity(nameVector, subjectEmbeddingMap[s.Name])))
+                        .Where(x => x.Similarity > 0.7f)
+                        .OrderByDescending(x => x.Similarity)
+                        .Take(3)
+                        .Select(x => x.Subject);
+
+                    matchedSubjects.AddRange(nameMatches);
+                    _logger.LogInformation("Matched name '{Name}' to {Count} subjects", subjectName, nameMatches.Count());
                 }
 
                 if (matchedSubjects.Count == 0)
@@ -175,5 +225,19 @@ Now extract from this user message:";
             await errorResponse.WriteStringAsync($"Error: {ex.Message}");
             return errorResponse;
         }
+    }
+
+    private static float CosineSimilarity(float[] a, float[] b)
+    {
+        var dot = 0f;
+        var magA = 0f;
+        var magB = 0f;
+        for (int i = 0; i < a.Length; i++)
+        {
+            dot += a[i] * b[i];
+            magA += a[i] * a[i];
+            magB += b[i] * b[i];
+        }
+        return dot / (MathF.Sqrt(magA) * MathF.Sqrt(magB));
     }
 }
