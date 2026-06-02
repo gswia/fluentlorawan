@@ -106,7 +106,7 @@ Now extract from this user message:";
             }
 
             // Build simple test graph
-            var graph = BuildSimpleTestGraph();
+            var graph = GraphStore.BuildSimpleTestGraph();
             _logger.LogInformation("Graph loaded: {SubjectCount} subjects, {SensorCount} sensors", 
                 graph.Subjects.Count, graph.Sensors.Count);
 
@@ -158,13 +158,6 @@ Now extract from this user message:";
                     continue;
                 }
 
-                // Verify capability applies to these subjects
-                if (!capability.AppliesTo(matchedSubjects.ToArray()))
-                {
-                    results.Add($"[{intentPair.Intent}] Capability does not apply to these subjects");
-                    continue;
-                }
-
                 // Step 4: Execute capability
                 var output = await capability.ExecuteAsync(matchedSubjects.ToArray(), graph);
                 results.Add(output.FinalPrompt);
@@ -183,145 +176,4 @@ Now extract from this user message:";
             return errorResponse;
         }
     }
-
-    private GraphStore BuildSimpleTestGraph()
-    {
-        var graph = new GraphStore();
-
-        // Create subjects
-        var property = new Subject
-        {
-            Id = "subj_property",
-            Name = "Mesa Airbnb",
-            Type = "property",
-            Metadata = new Dictionary<string, string>
-            {
-                { "address", "Mesa, AZ" }
-            }
-        };
-
-        var masterBedroom = new Subject
-        {
-            Id = "subj_master",
-            Name = "Master Bedroom",
-            Type = "room.bedroom",
-            Metadata = new Dictionary<string, string>
-            {
-                { "floor", "1" },
-                { "windows", "2" }
-            }
-        };
-
-        var bedroom4 = new Subject
-        {
-            Id = "subj_bedroom4",
-            Name = "Bedroom 4",
-            Type = "room.bedroom",
-            Metadata = new Dictionary<string, string>
-            {
-                { "floor", "2" },
-                { "windows", "1" }
-            }
-        };
-
-        graph.Subjects.Add(property.Id, property);
-        graph.Subjects.Add(masterBedroom.Id, masterBedroom);
-        graph.Subjects.Add(bedroom4.Id, bedroom4);
-
-        // Create sensors
-        var masterTempSensor = new GraphSensor
-        {
-            Id = "sensor_master_temp",
-            DeviceId = "device_master",
-            SensorType = SensorType.Temperature,
-            Metadata = new Dictionary<string, string>
-            {
-                { "unit", "fahrenheit" }
-            }
-        };
-
-        var masterHumiditySensor = new GraphSensor
-        {
-            Id = "sensor_master_humidity",
-            DeviceId = "device_master",
-            SensorType = SensorType.Humidity,
-            Metadata = new Dictionary<string, string>
-            {
-                { "unit", "percent" }
-            }
-        };
-
-        var bed4TempSensor = new GraphSensor
-        {
-            Id = "sensor_bed4_temp",
-            DeviceId = "device_bed4",
-            SensorType = SensorType.Temperature,
-            Metadata = new Dictionary<string, string>
-            {
-                { "unit", "fahrenheit" }
-            }
-        };
-
-        var bed4HumiditySensor = new GraphSensor
-        {
-            Id = "sensor_bed4_humidity",
-            DeviceId = "device_bed4",
-            SensorType = SensorType.Humidity,
-            Metadata = new Dictionary<string, string>
-            {
-                { "unit", "percent" }
-            }
-        };
-
-        graph.Sensors.Add(masterTempSensor.Id, masterTempSensor);
-        graph.Sensors.Add(masterHumiditySensor.Id, masterHumiditySensor);
-        graph.Sensors.Add(bed4TempSensor.Id, bed4TempSensor);
-        graph.Sensors.Add(bed4HumiditySensor.Id, bed4HumiditySensor);
-
-        // Create subject hierarchy relationships
-        graph.SubjectHierarchy.Add(new SubjectRelationship
-        {
-            ParentId = property.Id,
-            ChildId = masterBedroom.Id
-        });
-
-        graph.SubjectHierarchy.Add(new SubjectRelationship
-        {
-            ParentId = property.Id,
-            ChildId = bedroom4.Id
-        });
-
-        // Create sensor relationships
-        graph.SubjectSensors.Add(new SensorRelationship
-        {
-            SubjectId = masterBedroom.Id,
-            SensorId = masterTempSensor.Id
-        });
-
-        graph.SubjectSensors.Add(new SensorRelationship
-        {
-            SubjectId = masterBedroom.Id,
-            SensorId = masterHumiditySensor.Id
-        });
-
-        graph.SubjectSensors.Add(new SensorRelationship
-        {
-            SubjectId = bedroom4.Id,
-            SensorId = bed4TempSensor.Id
-        });
-
-        graph.SubjectSensors.Add(new SensorRelationship
-        {
-            SubjectId = bedroom4.Id,
-            SensorId = bed4HumiditySensor.Id
-        });
-
-        return graph;
-    }
-}
-
-public class IntentSubjectPair
-{
-    public string Intent { get; set; } = string.Empty;
-    public List<string> Subjects { get; set; } = new();
 }

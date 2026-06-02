@@ -2,13 +2,7 @@ namespace NoReturn.LoRaWAN.Graph
 {
     public class TemperatureCapability : Capability
     {
-        public override bool AppliesTo(Subject[] subjects)
-        {
-            // Applies to any subject with type starting with "room"
-            return subjects.Any(s => s.Type.StartsWith("room"));
-        }
-
-        public override async Task<CapabilityOutput> ExecuteAsync(Subject[] subjects, GraphStore graph)
+        public override Task<CapabilityOutput> ExecuteAsync(Subject[] subjects, GraphStore graph)
         {
             var sensorIds = new List<string>();
             var contexts = new List<string>();
@@ -61,10 +55,10 @@ namespace NoReturn.LoRaWAN.Graph
 Sensor Data:
 {toolResult}";
 
-            return new CapabilityOutput
+            return Task.FromResult(new CapabilityOutput
             {
                 FinalPrompt = finalPrompt
-            };
+            });
         }
     }
 }
