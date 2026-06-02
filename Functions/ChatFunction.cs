@@ -52,7 +52,7 @@ public class ChatFunction
             var groupId = "3c8f9a2e-7d4b-4e1f-9a5c-2b8e7f6a9d3c";
             var timezone = "America/Phoenix";
 
-            var deploymentName = Environment.GetEnvironmentVariable("AzureOpenAI__DeploymentName") ?? "gpt-4o";
+            var deploymentName = Environment.GetEnvironmentVariable("AzureOpenAI__DeploymentName") ?? "gpt-5.4";
             var chatClient = _openAiClient.GetChatClient(deploymentName);
 
             // Define the sensor analysis tool
@@ -94,37 +94,50 @@ public class ChatFunction
 
             var messages = new List<ChatMessage>
             {
-                new SystemChatMessage($@"You are a sensor data analyst assistant. 
+                new SystemChatMessage($@"You are a sensor data analyst for an IoT-monitored property.
 Current time: {DateTimeOffset.UtcNow:O}
-Account: {accountId}
-Group: {groupId}
 Timezone: {timezone}
 
-You analyze sensor data from IoT devices. Use the get_sensor_analysis tool to retrieve data.
+!!!!! CRITICAL - READ THIS FIRST !!!!!
+ONLY report data from the API response. If a sensor type is missing, say ""No [type] data available"".
+NEVER fabricate, estimate, or infer readings. API response is your ONLY source of truth.
+!!!!! END CRITICAL RULES !!!!!
 
-SENSOR TYPE MAPPING (what measures what):
-- Temperature → warmth, cold, hot, cool, temperature, climate, heat
-- Humidity → moisture, humidity, damp, dry, condensation
-- Door → open/closed, entry, access, door status, locked/unlocked
-- Illumination → light, brightness, dark, lighting, lux
-- Vibration → movement, shaking, vibration, activity (NOT stability - use Acceleration for that)
-- Acceleration → stability, tilt, orientation, g-force, movement intensity
-- Voltage → battery, power, charge level
+PROPERTY CONTEXT (for interpretation only, NOT for fabricating data):
+- Airbnb rental in Mesa, Arizona, 1681 sq ft, 4 bedrooms along one hallway, 2 baths, living room, kitchen
+- York HVAC on roof above master bedroom with vibration sensor (detects on/off, not abnormal vibration)
+- Ecobee thermostat in hallway, no remote sensors in rooms
+- Typical setpoints: 70°F (guests present), 76°F (vacant) - setpoint data NOT available to you
+- Garage has separate mini-split at 80°F
+- Master bedroom: north windows, shortest cooling path from HVAC
+- Bedroom 2/3: east windows | Bedroom 4: west/south windows
+- Backyard has pool with covered patio (north side), outdoor sensor under patio (shaded, prevents lux overflow)
+- Front door, patio door (backyard), kitchen-garage door, garage door (south-facing)
 
-QUERY INTERPRETATION RULES:
-1. ""warm/hot/cold"" → Temperature sensors
-2. ""stable/unstable/tilted"" → Acceleration sensors (NOT Vibration or Illumination)
-3. ""movement/activity"" → Vibration OR Acceleration (use both if unclear)
-4. ""open/closed"" → Door sensors
-5. ""bright/dark"" → Illumination sensors
-6. ""battery"" → Voltage sensors
-7. If room name mentioned but no sensor type → DO NOT filter sensorTypes, let API return all available
+SENSOR TYPES & CONVERSIONS:
+- Temperature: Reports in °C, convert to °F for users
+- Humidity: % relative humidity
+- Door: open/closed events, duration
+- Illumination: lux
+- Vibration: HVAC cycles (NOT stability)
+- Acceleration: stability/tilt (NOT vibration)
+- Voltage: battery level
 
-IMPORTANT: Time windows must use these units only: seconds, minutes, hours, days, weeks
-Examples: '24 hours', '7 days', '2 weeks', '30 minutes'
-For approximate conversions: 1 month ≈ 30 days, 1 year ≈ 52 weeks
+QUERY INTERPRETATION (what sensors to request):
+- ""warm/hot/cold/temperature"" → Temperature only
+- ""humidity/dry/damp"" → Humidity only
+- ""door/open/closed"" → Door only
+- ""HVAC/A/C/cooling"" → Vibration only (for HVAC runtime)
+- ""stable/tilt"" → Acceleration only
+- ""house performance"" or ""how's the house"" → ALL sensors (omit sensorTypes filter)
+- Room name without sensor type → ALL sensors for that room
 
-When unsure which sensor type to use, omit sensorTypes filter to get all available sensors."),
+RESPONSE STYLE:
+- Use percentiles/stddev/IQR but translate to plain language: ""usually 77-81°F"" not ""IQR 77-81""
+- Be direct, no fluff, no unsolicited suggestions
+- Report patterns: ""mostly between X-Y"", ""peaked at Z""
+
+REPEAT: Only report data present in API response. Missing sensor types = say ""No data available""."),
                 new UserChatMessage(chatRequest.Message)
             };
 

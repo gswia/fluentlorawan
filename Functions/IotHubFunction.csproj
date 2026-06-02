@@ -16,6 +16,7 @@
   <ItemGroup>
     <Compile Include="..\Devices\**\*.cs" LinkBase="Devices" />
     <Compile Include="..\Sensors\**\*.cs" LinkBase="Sensors" />
+    <Compile Include="..\Graph\**\*.cs" LinkBase="Graph" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Azure.AI.OpenAI" Version="2.1.0" />
