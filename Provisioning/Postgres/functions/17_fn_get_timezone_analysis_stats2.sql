@@ -42,9 +42,9 @@ BEGIN
 
     RETURN QUERY
     WITH 
-    -- Filter sensors by account_id for security
+    -- Filter sensors by account_id for security (DISTINCT to avoid duplicates if sensor in multiple groups)
     filtered_sensors AS (
-        SELECT s.sensor_id, s.device_id, s.sensor_type, s.sensor_profile
+        SELECT DISTINCT s.sensor_id, s.device_id, s.sensor_type, s.sensor_profile
         FROM v1.sensors s
         JOIN v1.device_groups dg ON dg.device_id = s.device_id
         JOIN v1.groups g ON g.group_id = dg.group_id
@@ -55,58 +55,58 @@ BEGIN
     temp_current AS (
         SELECT tw.*
         FROM v1.get_temperature_window_stats2(p_sensor_ids, v_window_start, v_window_end) tw
-        WHERE tw.sensor_id IN (SELECT sensor_id FROM filtered_sensors WHERE sensor_type = 'Temperature')
+        WHERE tw.sensor_id IN (SELECT fs.sensor_id FROM filtered_sensors fs WHERE fs.sensor_type = 'Temperature')
     ),
     hum_current AS (
         SELECT hw.*
         FROM v1.get_humidity_window_stats2(p_sensor_ids, v_window_start, v_window_end) hw
-        WHERE hw.sensor_id IN (SELECT sensor_id FROM filtered_sensors WHERE sensor_type = 'Humidity')
+        WHERE hw.sensor_id IN (SELECT fs.sensor_id FROM filtered_sensors fs WHERE fs.sensor_type = 'Humidity')
     ),
     illum_current AS (
         SELECT iw.*
         FROM v1.get_illumination_window_stats2(p_sensor_ids, v_window_start, v_window_end) iw
-        WHERE iw.sensor_id IN (SELECT sensor_id FROM filtered_sensors WHERE sensor_type = 'Illumination')
+        WHERE iw.sensor_id IN (SELECT fs.sensor_id FROM filtered_sensors fs WHERE fs.sensor_type = 'Illumination')
     ),
     door_current AS (
         SELECT dw.*
         FROM v1.get_door_window_stats2(p_sensor_ids, v_window_start, v_window_end) dw
-        WHERE dw.sensor_id IN (SELECT sensor_id FROM filtered_sensors WHERE sensor_type = 'Door')
+        WHERE dw.sensor_id IN (SELECT fs.sensor_id FROM filtered_sensors fs WHERE fs.sensor_type = 'Door')
     ),
     vib_current AS (
         SELECT vw.*
         FROM v1.get_vibration_window_stats2(p_sensor_ids, v_window_start, v_window_end) vw
-        WHERE vw.sensor_id IN (SELECT sensor_id FROM filtered_sensors WHERE sensor_type = 'Vibration')
+        WHERE vw.sensor_id IN (SELECT fs.sensor_id FROM filtered_sensors fs WHERE fs.sensor_type = 'Vibration')
     ),
     -- Previous window CTEs (only executed if v_compare_mode = true)
     temp_previous AS (
         SELECT tw.*
         FROM v1.get_temperature_window_stats2(p_sensor_ids, v_previous_start, v_previous_end) tw
         WHERE v_compare_mode
-          AND tw.sensor_id IN (SELECT sensor_id FROM filtered_sensors WHERE sensor_type = 'Temperature')
+          AND tw.sensor_id IN (SELECT fs.sensor_id FROM filtered_sensors fs WHERE fs.sensor_type = 'Temperature')
     ),
     hum_previous AS (
         SELECT hw.*
         FROM v1.get_humidity_window_stats2(p_sensor_ids, v_previous_start, v_previous_end) hw
         WHERE v_compare_mode
-          AND hw.sensor_id IN (SELECT sensor_id FROM filtered_sensors WHERE sensor_type = 'Humidity')
+          AND hw.sensor_id IN (SELECT fs.sensor_id FROM filtered_sensors fs WHERE fs.sensor_type = 'Humidity')
     ),
     illum_previous AS (
         SELECT iw.*
         FROM v1.get_illumination_window_stats2(p_sensor_ids, v_previous_start, v_previous_end) iw
         WHERE v_compare_mode
-          AND iw.sensor_id IN (SELECT sensor_id FROM filtered_sensors WHERE sensor_type = 'Illumination')
+          AND iw.sensor_id IN (SELECT fs.sensor_id FROM filtered_sensors fs WHERE fs.sensor_type = 'Illumination')
     ),
     door_previous AS (
         SELECT dw.*
         FROM v1.get_door_window_stats2(p_sensor_ids, v_previous_start, v_previous_end) dw
         WHERE v_compare_mode
-          AND dw.sensor_id IN (SELECT sensor_id FROM filtered_sensors WHERE sensor_type = 'Door')
+          AND dw.sensor_id IN (SELECT fs.sensor_id FROM filtered_sensors fs WHERE fs.sensor_type = 'Door')
     ),
     vib_previous AS (
         SELECT vw.*
         FROM v1.get_vibration_window_stats2(p_sensor_ids, v_previous_start, v_previous_end) vw
         WHERE v_compare_mode
-          AND vw.sensor_id IN (SELECT sensor_id FROM filtered_sensors WHERE sensor_type = 'Vibration')
+          AND vw.sensor_id IN (SELECT fs.sensor_id FROM filtered_sensors fs WHERE fs.sensor_type = 'Vibration')
     ),
     -- Combine all sensor types
     all_sensors AS (

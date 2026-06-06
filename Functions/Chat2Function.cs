@@ -79,6 +79,8 @@ Available subjects in this property:
 Return a JSON array of objects with:
 - 'intent': the intent name
 - 'subjectIds': array of subject IDs that match the user's query
+- 'timeWindow': PostgreSQL interval format (e.g., ""24 hours"", ""7 days"", ""1 week""), default to ""24 hours""
+- 'compareWith': PostgreSQL interval for comparison period (e.g., ""24 hours"" for previous day), or null if no comparison
 
 Matching rules:
 - Match shortcuts naturally (""master"" → master_bedroom, ""bed 4"" → bedroom_4)
@@ -86,18 +88,22 @@ Matching rules:
 - Match hierarchical queries (""rooms"" → all subjects with type starting with room.)
 - If no specific location mentioned, match to 'property' subject (whole house)
 
+Time extraction rules:
+- ""last 24 hours"", ""today"" → timeWindow: ""24 hours"", compareWith: null
+- ""last week"" → timeWindow: ""7 days"", compareWith: null
+- ""today vs yesterday"" → timeWindow: ""24 hours"", compareWith: ""24 hours""
+- ""this week vs last week"" → timeWindow: ""7 days"", compareWith: ""7 days""
+- Default if not specified: timeWindow: ""24 hours"", compareWith: null
+
 Examples:
 User: ""How warm is bedroom 4?""
-Output: [{{""intent"": ""TEMPERATURE_CURRENT"", ""subjectIds"": [""bedroom_4""]}}]
+Output: [{{""intent"": ""TEMPERATURE_CURRENT"", ""subjectIds"": [""bedroom_4""], ""timeWindow"": ""24 hours"", ""compareWith"": null}}]
 
-User: ""How warm are the bedrooms?""
-Output: [{{""intent"": ""TEMPERATURE_CURRENT"", ""subjectIds"": [""master_bedroom"", ""bedroom_4""]}}]
+User: ""Temperature in master today vs yesterday?""
+Output: [{{""intent"": ""TEMPERATURE_COMPARISON"", ""subjectIds"": [""master_bedroom""], ""timeWindow"": ""24 hours"", ""compareWith"": ""24 hours""}}]
 
-User: ""Temperature in master?""
-Output: [{{""intent"": ""TEMPERATURE_CURRENT"", ""subjectIds"": [""master_bedroom""]}}]
-
-User: ""Temperature in master bedroom and bedroom 4?""
-Output: [{{""intent"": ""TEMPERATURE_CURRENT"", ""subjectIds"": [""master_bedroom"", ""bedroom_4""]}}]
+User: ""How warm are the bedrooms last week?""
+Output: [{{""intent"": ""TEMPERATURE_CURRENT"", ""subjectIds"": [""master_bedroom"", ""bedroom_4""], ""timeWindow"": ""7 days"", ""compareWith"": null}}]
 
 Now extract from this user message:";
 
@@ -130,55 +136,103 @@ Now extract from this user message:";
                 return badRequest;
             }
 
-            // Process each intent
-            var results = new List<string>();
+            // Build execution plan
+            var executionPlan = new ExecutionPlan
+            {
+                Tokens = new TokenUsage
+                {
+                    InputTokens = usage.InputTokenCount,
+                    OutputTokens = usage.OutputTokenCount,
+                    TotalTokens = usage.TotalTokenCount
+                }
+            };
+
+            // Hardcoded context for now
+            var accountId = Guid.Parse("00000000-0000-0000-0000-000000000001"); // TODO: Get from auth context
+            var timezone = "America/Phoenix"; // TODO: Get from user profile
 
             foreach (var intentPair in intentPairs)
             {
                 _logger.LogInformation("Processing intent: {Intent} with {Count} subject IDs", 
                     intentPair.Intent, intentPair.SubjectIds.Count);
 
-                // Step 2: Lookup matched subjects from graph
-                var matchedSubjects = intentPair.SubjectIds
-                    .Select(id => graph.Subjects.TryGetValue(id, out var subject) ? subject : null)
-                    .Where(s => s != null)
-                    .Cast<Subject>()
-                    .ToArray();
-
-                if (matchedSubjects.Length == 0)
+                // Determine capability names (one intent can need multiple capabilities)
+                var capabilityNames = intentPair.Intent switch
                 {
-                    results.Add($"[{intentPair.Intent}] No matching locations found.");
-                    continue;
-                }
-
-                _logger.LogInformation("Matched {Count} subjects: {Subjects}", 
-                    matchedSubjects.Length, string.Join(", ", matchedSubjects.Select(s => s.Name)));
-
-                // Step 3: Select capability based on intent
-                Capability? capability = intentPair.Intent switch
-                {
-                    "TEMPERATURE_CURRENT" => new TemperatureCapability(),
-                    "TEMPERATURE_COMPARISON" => new TemperatureCapability(),
-                    // TODO: Add other capabilities (Humidity, Door, etc.)
-                    _ => null
+                    "TEMPERATURE_CURRENT" => new[] { "TemperatureCapability" },
+                    "TEMPERATURE_COMPARISON" => new[] { "TemperatureCapability" },
+                    "HUMIDITY_CURRENT" => new[] { "HumidityCapability" },
+                    "DOOR_STATUS" => new[] { "DoorCapability" },
+                    "ILLUMINATION_CURRENT" => new[] { "IlluminationCapability" },
+                    "VIBRATION_RUNTIME" => new[] { "VibrationCapability" },
+                    "HOUSE_OVERVIEW" => new[] { "TemperatureCapability", "HumidityCapability", "DoorCapability", "IlluminationCapability", "VibrationCapability" },
+                    _ => new[] { "Unknown" }
                 };
 
-                if (capability == null)
+                // Map capabilities to sensor types
+                var requiredSensorTypes = new HashSet<SensorType>();
+                foreach (var capability in capabilityNames)
                 {
-                    results.Add($"[{intentPair.Intent}] No capability handler implemented yet");
-                    continue;
+                    var sensorType = capability switch
+                    {
+                        "TemperatureCapability" => SensorType.Temperature,
+                        "HumidityCapability" => SensorType.Humidity,
+                        "DoorCapability" => SensorType.Door,
+                        "IlluminationCapability" => SensorType.Illumination,
+                        "VibrationCapability" => SensorType.Vibration,
+                        _ => (SensorType?)null
+                    };
+                    if (sensorType.HasValue)
+                    {
+                        requiredSensorTypes.Add(sensorType.Value);
+                    }
                 }
 
-                // Step 4: Execute capability
-                var output = await capability.ExecuteAsync(matchedSubjects, graph);
-                results.Add(output.FinalPrompt);
+                // Resolve subject IDs to sensor GUIDs, filtered by required sensor types
+                var sensorIds = new List<Guid>();
+                foreach (var subjectId in intentPair.SubjectIds)
+                {
+                    if (graph.Subjects.TryGetValue(subjectId, out var subject))
+                    {
+                        // Get all sensors for this subject via sensor relationships
+                        var subjectSensorIds = graph.SubjectSensors
+                            .Where(sr => sr.SubjectId == subjectId)
+                            .Select(sr => sr.SensorId)
+                            .ToList();
+                        
+                        foreach (var sensorId in subjectSensorIds)
+                        {
+                            if (graph.Sensors.TryGetValue(sensorId, out var sensor))
+                            {
+                                // Only add sensors matching required types
+                                if (requiredSensorTypes.Contains(sensor.SensorType))
+                                {
+                                    sensorIds.Add(sensor.SensorId);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                executionPlan.Steps.Add(new ExecutionStep
+                {
+                    Intent = intentPair.Intent,
+                    SubjectIds = intentPair.SubjectIds,
+                    Capabilities = capabilityNames.ToList(),
+                    AccountId = accountId,
+                    SensorIds = sensorIds,
+                    Timezone = timezone,
+                    TimeWindow = intentPair.TimeWindow,
+                    CompareWith = intentPair.CompareWith
+                });
             }
 
-            var finalResult = string.Join("\n\n---\n\n", results);
-            finalResult += $"\n\n{tokenInfo}";
-            
             var response = req.CreateResponse(HttpStatusCode.OK);
-            await response.WriteStringAsync(finalResult);
+            response.Headers.Add("Content-Type", "application/json");
+            await response.WriteStringAsync(JsonSerializer.Serialize(executionPlan, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            }));
             return response;
         }
         catch (Exception ex)

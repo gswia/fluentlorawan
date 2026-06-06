@@ -15,7 +15,7 @@ namespace NoReturn.LoRaWAN.Graph
             // Create subjects
             var property = new Subject
             {
-                Id = "subj_property",
+                Id = "property",
                 Name = "Mesa Airbnb",
                 Type = "property",
                 Metadata = new Dictionary<string, string>
@@ -26,7 +26,7 @@ namespace NoReturn.LoRaWAN.Graph
 
             var masterBedroom = new Subject
             {
-                Id = "subj_master",
+                Id = "master_bedroom",
                 Name = "Master Bedroom",
                 Type = "room.bedroom",
                 Metadata = new Dictionary<string, string>
@@ -38,7 +38,7 @@ namespace NoReturn.LoRaWAN.Graph
 
             var bedroom4 = new Subject
             {
-                Id = "subj_bedroom4",
+                Id = "bedroom_4",
                 Name = "Bedroom 4",
                 Type = "room.bedroom",
                 Metadata = new Dictionary<string, string>
@@ -56,6 +56,7 @@ namespace NoReturn.LoRaWAN.Graph
             var masterTempSensor = new GraphSensor
             {
                 Id = "sensor_master_temp",
+                SensorId = Guid.Parse("10000000-0000-0000-0000-000000000001"),
                 DeviceId = "device_master",
                 SensorType = SensorType.Temperature,
                 Metadata = new Dictionary<string, string>
@@ -67,6 +68,7 @@ namespace NoReturn.LoRaWAN.Graph
             var masterHumiditySensor = new GraphSensor
             {
                 Id = "sensor_master_humidity",
+                SensorId = Guid.Parse("10000000-0000-0000-0000-000000000002"),
                 DeviceId = "device_master",
                 SensorType = SensorType.Humidity,
                 Metadata = new Dictionary<string, string>
@@ -78,6 +80,7 @@ namespace NoReturn.LoRaWAN.Graph
             var bed4TempSensor = new GraphSensor
             {
                 Id = "sensor_bed4_temp",
+                SensorId = Guid.Parse("10000000-0000-0000-0000-000000000003"),
                 DeviceId = "device_bed4",
                 SensorType = SensorType.Temperature,
                 Metadata = new Dictionary<string, string>
@@ -89,6 +92,7 @@ namespace NoReturn.LoRaWAN.Graph
             var bed4HumiditySensor = new GraphSensor
             {
                 Id = "sensor_bed4_humidity",
+                SensorId = Guid.Parse("10000000-0000-0000-0000-000000000004"),
                 DeviceId = "device_bed4",
                 SensorType = SensorType.Humidity,
                 Metadata = new Dictionary<string, string>
